@@ -1,4 +1,4 @@
-package ma.ensi.myJob.Repository;
+package ma.ensi.myJob.repository;
 
 import ma.ensi.myJob.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

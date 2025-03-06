@@ -1,7 +1,7 @@
-package ma.ensi.myJob.Service;
+package ma.ensi.myJob.service;
 
 import ma.ensi.myJob.Model.User;
-import ma.ensi.myJob.Repository.UserRepo;
+import ma.ensi.myJob.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
