@@ -2,7 +2,7 @@ package ma.ensi.myJob.UserController;
 
 import ma.ensi.myJob.Model.User;
 import ma.ensi.myJob.Service.LoginRequest;
-import ma.ensi.myJob.Service.UserService;
+import ma.ensi.myJob.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
