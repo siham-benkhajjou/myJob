@@ -23,4 +23,5 @@ public class Recruteur extends Personne {
     public void setDefaultRole() {
         this.setRole(Role.RECRUTEUR);
     }
+
 }

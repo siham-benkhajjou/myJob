@@ -3,14 +3,13 @@ package ma.ensi.myJob.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Data
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Personne {
+public abstract class Personne{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
@@ -18,9 +17,6 @@ public abstract class Personne {
 
     @JsonProperty("cin")
     private String cin;
-
-    @JsonProperty("mdp")
-    private String mdp;
 
     @JsonProperty("email")
     private String email;
@@ -38,6 +34,9 @@ public abstract class Personne {
     @JsonProperty("user_name")
     private String userName;
 
+    @JsonProperty("mdp")
+    private String mdp;
+
     @JsonProperty("fonctionnement")
     private String fonctionnement;
 
@@ -47,8 +46,4 @@ public abstract class Personne {
     @JsonProperty("date_de_naissance")
     private LocalDate dateDeNaissance;
 
-    // Explicit setter for role
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }
