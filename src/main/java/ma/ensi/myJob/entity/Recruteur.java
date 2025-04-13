@@ -10,14 +10,34 @@ import lombok.*;
 @AllArgsConstructor
 public class Recruteur extends Personne {
 
-    @JsonProperty("fonctionnement")
-    private String fonctionnement;
+    @JsonProperty("poste")
+    private String poste;
 
     @JsonProperty("linkedin")
     private String linkedin;
 
     @JsonProperty("nom_entreprise")
     private String nomEntreprise;
+
+    @JsonProperty("logo_entreprise")
+    private String logoEntreprise;
+
+    @JsonProperty("secteur")
+    private String secteur;
+
+    @JsonProperty("adresse")
+    private String adresse;
+
+    @JsonProperty("site_web")
+    private String siteWeb;
+
+    @JsonProperty("description")
+    @Column(length = 2000)
+    private String description;
+
+    public String getFullName() {
+        return getPrenom() + " " + getNom();
+    }
 
     @PrePersist
     public void setDefaultRole() {

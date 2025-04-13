@@ -8,14 +8,14 @@ import java.util.Optional;
 
 public interface IRecruteurService {
 
-    public List<Recruteur> getAllRecruteurs();
+    public List<RecruteurDto> getAllRecruteurs();
 
-    public Optional<Recruteur> getRecruteurById(Long id);
+    public Optional<RecruteurDto> getRecruteurById(Long id);
 
     public Recruteur saveRecruteur(Recruteur recruteur);
 
     public void deleteRecruteur(Long id) ;
 
-    public Recruteur updateRecruteur(Long id, RecruteurDto dto);
+    public RecruteurDto updateRecruteur(Long id, RecruteurDto dto);
 
 }

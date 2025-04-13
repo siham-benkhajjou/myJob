@@ -5,15 +5,17 @@ import lombok.Data;
 @Data
 public class RecruteurDto {
 
-    private String cin;
-    private String email;
     private String nom;
     private String prenom;
-    private String userName;
-    private String mdp;
-    private Integer numTele;
-    private String fonctionnement;
+    private String poste;
+    private String email;
     private String linkedin;
+
     private String nomEntreprise;
+    private String logoEntreprise;
+    private String secteur;
+    private String adresse;
+    private String siteWeb;
+    private String description;
 
 }

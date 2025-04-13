@@ -6,6 +6,8 @@ import ma.ensi.myJob.service.RecruteurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,27 +22,21 @@ public class RecruteurController implements IRecruteurController{
     private RecruteurService recruteurService;
 
     @Override
-    public ResponseEntity<Recruteur> register(RecruteurDto dto) {
-        Recruteur recruteur = recruteurService.registerRecruteur(dto);
-        return ResponseEntity.ok(recruteur);
-    }
-
-    @Override
     public ResponseEntity<Recruteur> createRecruteur(Recruteur recruteur) {
         Recruteur savedRecruteur = recruteurService.saveRecruteur(recruteur);
         return new ResponseEntity<>(savedRecruteur, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<List<Recruteur>> getAllRecruteurs() {
-        List<Recruteur> recruteurs = recruteurService.getAllRecruteurs();
+    public ResponseEntity<List<RecruteurDto>> getAllRecruteurs() {
+        List<RecruteurDto> recruteurs = recruteurService.getAllRecruteurs();
         return new ResponseEntity<>(recruteurs, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Recruteur> getRecruteurById(Long id) {
-        Optional<Recruteur> recruteur = recruteurService.getRecruteurById(id);
-        return recruteur.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    public ResponseEntity<RecruteurDto> getRecruteurById(@PathVariable Long id) {
+        Optional<RecruteurDto> dto = recruteurService.getRecruteurById(id);
+        return dto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @Override
@@ -50,8 +46,8 @@ public class RecruteurController implements IRecruteurController{
     }
 
     @Override
-    public ResponseEntity<Recruteur> updateRecruteur(Long id, RecruteurDto dto) {
-        Recruteur updated = recruteurService.updateRecruteur(id, dto);
+    public ResponseEntity<RecruteurDto> updateRecruteur(@PathVariable Long id, @RequestBody RecruteurDto dto) {
+        RecruteurDto updated = recruteurService.updateRecruteur(id, dto);
         return ResponseEntity.ok(updated);
     }
 }
