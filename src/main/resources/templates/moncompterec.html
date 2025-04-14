@@ -59,6 +59,7 @@
 </head>
 
 <body class="about-page">
+
 <header id="header" class="header d-flex align-items-center light-background sticky-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
@@ -70,21 +71,12 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
+                <li><a href="/recruteur/home">home</a></li>
                 <li><a href="/recruteur/mon-compte">Mon Compte</a></li>
-                <li class="dropdown"><a href="#"><span>offre</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                        <li><a href="consulteroffre.html">consulter un offre</a></li>
-                        <li><a href="creeroffre.html">creer offre</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a href="#"><span>annance</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                        <li><a href="consulterannace.html">consulter un annance</a></li>
-                        <li><a href="creerannace.html">creer annace</a></li>
-                    </ul>
-                </li>
-                <li><a href="lesapp.html">App Reçus</a></li>
-                <li><a href="Reclamation.html">Soumettre une Réclamation</a></li>
+                <li><a href="/recruteur/offres">offre</a></li>
+                <li><a href="/recruteur/annonces">annance</a></li>
+                <li><a href="/recruteur/applications">App Reçus</a></li>
+                <li><a href="/recruteur/Reclamation">Soumettre une Réclamation</a></li>
 
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -106,7 +98,11 @@
 
             <!-- Recruiter Info -->
             <div class="col-lg-5 text-center">
-                <img src="/assets/img/profile-img.jpg" class="img-fluid rounded-circle mb-3" alt="Recruteur">
+                <!-- Always show local image -->
+                <img src="/assets/img/profile-img.jpg"
+                     class="img-fluid rounded-circle mb-3"
+                     alt="Photo du Recruteur" />
+
                 <a href="/recruteur/modifier-compte-rec" class="btn custom-btn">
                     Modifier Mon Compte
                 </a>
@@ -114,29 +110,28 @@
 
             <!-- Recruiter Details -->
             <div class="col-lg-7">
-                <h2 class="mb-3">Nom du Recruteur</h2>
-                <p class="fst-italic">Description du poste</p>
+                <h2 class="mb-3" th:text="${recruteur.prenom + ' ' + recruteur.nom}">Nom du Recruteur</h2>
+                <p class="fst-italic" th:text="${recruteur.poste}">Poste</p>
                 <ul class="list-unstyled">
-                    <li><i class="bi bi-chevron-right"></i> <strong>LinkedIn:</strong> <span>linkedin.com/in/recruteur</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>recruteur@email.com</span></li>
+                    <li><i class="bi bi-chevron-right"></i> <strong>LinkedIn:</strong> <span th:text="${recruteur.linkedin}">linkedin.com/in/recruteur</span></li>
+                    <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span th:text="${recruteur.email}">recruteur@email.com</span></li>
                 </ul>
 
                 <hr class="my-4">
 
-                <h2 class="mb-3">Nom de l'entreprise</h2>
-                <p class="fst-italic">Description de l'entreprise</p>
+                <h2 class="mb-3" th:text="${recruteur.nomEntreprise}">Nom de l'entreprise</h2>
+                <p class="fst-italic" th:text="${recruteur.description}">Description de l'entreprise</p>
                 <ul class="list-unstyled">
-                    <li><i class="bi bi-chevron-right"></i> <strong>Secteur:</strong> <span>Informatiques</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Site Web:</strong> <span>www.entreprise.com</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Adresse:</strong> <span>123 Rue Exemple, Ville</span></li>
+                    <li><i class="bi bi-chevron-right"></i> <strong>Secteur:</strong> <span th:text="${recruteur.secteur}">xxxxx</span></li>
+                    <li><i class="bi bi-chevron-right"></i> <strong>Site Web:</strong> <span th:text="${recruteur.siteWeb}">www.entreprise.com</span></li>
+                    <li><i class="bi bi-chevron-right"></i> <strong>Adresse:</strong> <span th:text="${recruteur.adresse}">123 Rue Exemple, Ville</span></li>
                 </ul>
             </div>
 
         </div>
     </div>
-
-
 </main>
+
 
 
 

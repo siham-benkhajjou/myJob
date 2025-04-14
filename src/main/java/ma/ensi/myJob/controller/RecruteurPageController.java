@@ -1,12 +1,22 @@
 package ma.ensi.myJob.controller;
 
+import ma.ensi.myJob.DTO.RecruteurDto;
+import ma.ensi.myJob.entity.Recruteur;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/recruteur")
 public class RecruteurPageController {
+    @Autowired
+    ma.ensi.myJob.service.RecruteurService recruteurService;
 
     // Dashboard Home
     @GetMapping("/home")
@@ -14,27 +24,30 @@ public class RecruteurPageController {
         return "recruteur-home"; // templates/recruteur-home.html
     }
 
-    // Mon Compte
+
     @GetMapping("/mon-compte")
-    public String monCompte() {
-        return "moncompterec"; // templates/moncompterec.html
+    public String monCompte(Model model, Principal principal) {
+
+        String email = principal.getName(); // Retrieves the email of the logged-in user
+        Recruteur recruteur = recruteurService.findByEmail(email); // Retrieves the Recruteur entity from DB
+        model.addAttribute("recruteur", recruteur); // Makes it accessible in the HTML via ${recruteur}
+        return "moncompterec"; // Tells Spring to render templates/moncompterec.html
     }
 
-    // Annonce Consultation
+    @GetMapping("/offres")
+    public String offresPage() {
+        return "recruteur-offres";
+    }
+
     @GetMapping("/annonces")
-    public String annonces() {
-        return "recruteur-annonces"; // templates/recruteur-annonces.html
+    public String annoncesPage() {
+        return "recruteur-annonces";
     }
 
-    // Applications Reçues
     @GetMapping("/applications")
-    public String applications() {
-        return "recruteur-applications"; // templates/recruteur-applications.html
+    public String applicationsPage() {
+        return "recruteur-applications";
     }
 
-    // Soumettre une Réclamation
-    @GetMapping("/reclamation")
-    public String reclamation() {
-        return "recruteur-reclamation"; // templates/recruteur-reclamation.html
-    }
+
 }
