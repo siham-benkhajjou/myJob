@@ -59,4 +59,10 @@ public class RecruteurService implements IRecruteurService{
         Recruteur updated = recruteurRepository.save(existingRecruteur);
         return toDto(updated);
   }
+
+    @Override
+    public Recruteur findByEmail(String email) {
+        return recruteurRepository.findByEmail(email).get();
+    }
+
 }

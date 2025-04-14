@@ -18,4 +18,5 @@ public interface IRecruteurService {
 
     public RecruteurDto updateRecruteur(Long id, RecruteurDto dto);
 
+    public Recruteur findByEmail(String email);
 }
