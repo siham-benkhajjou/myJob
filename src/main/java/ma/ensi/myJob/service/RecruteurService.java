@@ -28,7 +28,7 @@ public class RecruteurService implements IRecruteurService{
     @Override
     public List<RecruteurDto> getAllRecruteurs() {
         Iterable<Recruteur> recruteurs = recruteurRepository.findAll();
-        return StreamSupport.stream(recruteurs.spliterator(), false)
+        return recruteurRepository.findAll().stream()
                 .map(RecruteurMapper::toDto)
                 .collect(Collectors.toList());
     }
