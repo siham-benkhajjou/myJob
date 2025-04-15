@@ -25,6 +25,7 @@
   --accent-color: #34b7a7; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --icons-color: #a8d5ba;
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -1488,5 +1489,27 @@ section,
 .btn-accent:hover {
   background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
   color: var(--contrast-color);
+}
+
+.page-inscription, .custom-card {
+  background-color: #EDE9E7;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-inscription, .custom-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.page-inscription, .page-inscription html {
+  height: 100%;
+  margin: 0;
+  background-color: #EDE9E7;
+  overflow-x: hidden;
+}
+
+.page-inscription .container, .page-inscription .row {
+  padding: 0;
+  margin: 0;
 }
 
