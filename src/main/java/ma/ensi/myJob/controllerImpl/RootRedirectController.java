@@ -1,4 +1,4 @@
-package ma.ensi.myJob.controller;
+package ma.ensi.myJob.controllerImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

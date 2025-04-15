@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajouter Réclamation</title>
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+        <a href="/recruteur/home" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/recruteur/home">home</a></li>
+                <li><a href="/recruteur/mon-compte">Mon Compte</a></li>
+                <li><a href="/recruteur/offres">offre</a></li>
+                <li><a href="/recruteur/annonces">annance</a></li>
+                <li><a href="/recruteur/applications">App Reçus</a></li>
+                <li><a href="/recruteur/Reclamation" class="active">Soumettre une Réclamation</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link">
+                <i class="bi bi-box-arrow-right"></i> Se déconnecter
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="main mt-5">
+    <div class="container py-5">
+        <div class="section-title text-center mb-5">
+            <h2>Nouvelle Réclamation</h2>
+            <p>Remplissez ce formulaire pour soumettre une nouvelle réclamation</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <form th:action="@{/recruteur/addReclamation}" method="post">
+                            <div class="mb-4">
+                                <label for="title" class="form-label">Titre</label>
+                                <input type="text" class="form-control" id="title" name="title" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="type" class="form-label">Type de Réclamation</label>
+                                <select class="form-select" id="type" name="type" required>
+                                    <option value="">Sélectionnez un type</option>
+                                    <option value="PROBLEME_TECHNIQUE">Problème technique</option>
+                                    <option value="PLAINTE">Plainte</option>
+                                    <option value="QUESTION">Question</option>
+                                    <option value="COMPTE">Problème de compte</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="/recruteur/Reclamation" class="btn btn-outline-secondary me-md-2">
+                                    <i class="bi bi-arrow-left"></i> Annuler
+                                </a>
+                                <button type="submit" class="btn btn-accent">
+                                    <i class="bi bi-send"></i> Soumettre
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+
+</html>

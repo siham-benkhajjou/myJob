@@ -1,6 +1,6 @@
 package ma.ensi.myJob.Config;
 
-import ma.ensi.myJob.service.CustomUserDetailsService;
+import ma.ensi.myJob.serviceImpl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

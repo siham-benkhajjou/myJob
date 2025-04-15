@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Détails Réclamation</title>
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
+</head>
+<body>
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+        <a href="/recruteur/home" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/recruteur/home">Home</a></li>
+                <li><a href="/recruteur/mon-compte">Mon Compte</a></li>
+                <li><a href="/recruteur/offres">Offres</a></li>
+                <li><a href="/recruteur/annonces">Annonces</a></li>
+                <li><a href="/recruteur/applications">App Reçus</a></li>
+                <li><a href="/recruteur/Reclamation" class="active">Réclamations</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link">
+                <i class="bi bi-box-arrow-right"></i> Se déconnecter
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="main mt-5">
+    <div class="container py-5">
+        <div class="section-title text-center mb-5">
+            <h2>Détails de la Réclamation</h2>
+        </div>
+
+        <div class="card shadow-sm p-4 custom-card">
+            <div class="card-body">
+                <h4 class="card-title" th:text="${reclamation.title}">Titre</h4>
+                <h6 class="text-muted mb-3" th:text="${reclamation.type?.displayName}">Type</h6>
+
+                <div class="mb-3">
+                    <strong>Description :</strong>
+                    <p th:text="${reclamation.description}">Contenu</p>
+                </div>
+
+                <div class="mb-3">
+                    <strong>Statut :</strong>
+                    <th:block th:switch="${reclamation.status?.name()}">
+                        <span th:case="'NOUVELLE'" class="badge bg-primary" th:text="${reclamation.status?.displayName}">Statut</span>
+                        <span th:case="'EN_COURS'" class="badge bg-warning" th:text="${reclamation.status?.displayName}">Statut</span>
+                        <span th:case="*" class="badge bg-success" th:text="${reclamation.status?.displayName}">Statut</span>
+                    </th:block>
+                </div>
+
+                <div class="mb-4">
+                    <strong>Date de création :</strong>
+                    <span th:text="${#dates.format(reclamation.dateReclamation, 'dd/MM/yyyy')}">Date</span>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <a th:href="@{/recruteur/Reclamation/edit/{id}(id=${reclamation.idReclamation})}"
+                       class="btn btn-accent">
+                        <i class="bi bi-pencil-fill me-1"></i> Modifier
+                    </a>
+
+                    <form th:action="@{/recruteur/deleteReclamation/{id}(id=${reclamation.idReclamation})}" method="post"
+                          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réclamation ?');">
+                        <button type="submit" class="btn btn-accent">
+                            <i class="bi bi-trash3-fill me-1"></i> Supprimer
+                        </button>
+                    </form>
+
+                    <a href="/recruteur/Reclamation" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-1"></i> Retour
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

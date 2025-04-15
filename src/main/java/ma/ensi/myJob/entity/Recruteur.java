@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -44,4 +47,7 @@ public class Recruteur extends Personne {
         this.setRole(Role.RECRUTEUR);
     }
 
+    @OneToMany(mappedBy = "recruteur", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonProperty("reclamations")
+    private List<Reclamation> reclamations = new ArrayList<>();
 }

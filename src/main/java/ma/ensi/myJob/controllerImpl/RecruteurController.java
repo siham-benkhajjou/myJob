@@ -1,8 +1,10 @@
-package ma.ensi.myJob.controller;
+package ma.ensi.myJob.controllerImpl;
+
 
 import ma.ensi.myJob.DTO.RecruteurDto;
+import ma.ensi.myJob.controller.IRecruteurController;
 import ma.ensi.myJob.entity.Recruteur;
-import ma.ensi.myJob.service.RecruteurService;
+import ma.ensi.myJob.serviceImpl.RecruteurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/recruteurs")
-public class RecruteurController implements IRecruteurController{
+public class RecruteurController implements IRecruteurController {
 
     @Autowired
     private RecruteurService recruteurService;
@@ -50,4 +52,5 @@ public class RecruteurController implements IRecruteurController{
         RecruteurDto updated = recruteurService.updateRecruteur(id, dto);
         return ResponseEntity.ok(updated);
     }
+
 }

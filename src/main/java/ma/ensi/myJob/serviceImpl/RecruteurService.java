@@ -1,9 +1,10 @@
-package ma.ensi.myJob.service;
+package ma.ensi.myJob.serviceImpl;
 
 import ma.ensi.myJob.DTO.RecruteurDto;
 import ma.ensi.myJob.entity.Recruteur;
 import ma.ensi.myJob.mapper.RecruteurMapper;
 import ma.ensi.myJob.repository.RecruteurRepository;
+import ma.ensi.myJob.service.IRecruteurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static ma.ensi.myJob.mapper.RecruteurMapper.toDto;
 import static ma.ensi.myJob.mapper.RecruteurMapper.updateEntityFromDto;
 
 @Service
-public class RecruteurService implements IRecruteurService{
+public class RecruteurService implements IRecruteurService {
 
     @Autowired
     private RecruteurRepository recruteurRepository;
@@ -47,6 +47,7 @@ public class RecruteurService implements IRecruteurService{
     public void deleteRecruteur(Long id) {
         recruteurRepository.deleteById(id);
     }
+
     @Override
     public RecruteurDto updateRecruteur(Long id, RecruteurDto dto){
         Optional<Recruteur> optionalRecruteur = recruteurRepository.findById(id);

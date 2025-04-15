@@ -1,12 +1,16 @@
-package ma.ensi.myJob.service;
+package ma.ensi.myJob.serviceImpl;
 
 import ma.ensi.myJob.DTO.ReclamationDTO;
 import ma.ensi.myJob.entity.Reclamation;
+import ma.ensi.myJob.entity.ReclamationStatus;
+import ma.ensi.myJob.entity.Recruteur;
 import ma.ensi.myJob.mapper.ReclamationMapper;
 import ma.ensi.myJob.repository.ReclamationRepository;
+import ma.ensi.myJob.repository.RecruteurRepository;
+import ma.ensi.myJob.service.IReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,9 +21,18 @@ public class ReclamationServiceImpl implements IReclamationService {
     @Autowired
     private ReclamationRepository repository;
 
+    @Autowired
+    private RecruteurRepository recruteurRepository;
+
     @Override
-    public void ajouterReclamation(ReclamationDTO dto) {
-        repository.save(ReclamationMapper.toEntity(dto));
+    public void ajouterReclamation(ReclamationDTO dto, String email) {
+        Recruteur recruteur = recruteurRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Recruteur not found with email: " + dto.getRecruteurId()));
+        dto.setRecruteurId(recruteur.getId());
+        dto.setStatus(ReclamationStatus.NOUVELLE);
+        Reclamation entity = ReclamationMapper.toEntity(dto, recruteur);
+        entity.setDateReclamation(new Date());
+        repository.save(entity);
     }
 
     @Override
@@ -28,10 +41,9 @@ public class ReclamationServiceImpl implements IReclamationService {
 
         if (optionalReclamation.isPresent()) {
             Reclamation existing = optionalReclamation.get();
-
+            existing.setTitle(dto.getTitle());
             existing.setDescription(dto.getDescription());
             existing.setType(dto.getType());
-            existing.setDateReclamation(dto.getDateReclamation());
 
             repository.save(existing);
         } else {
@@ -53,6 +65,16 @@ public class ReclamationServiceImpl implements IReclamationService {
     @Override
     public List<ReclamationDTO> getAllReclamations() {
         return repository.findAll().stream()
+                .map(ReclamationMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ReclamationDTO> getReclamationsByRecruteurId(Long recruteurId) {
+        if (!recruteurRepository.existsById(recruteurId)) {
+            throw new RuntimeException("Recruteur not found with ID: " + recruteurId);
+        }
+        return repository.findByRecruteurId(recruteurId).stream()
                 .map(ReclamationMapper::toDTO)
                 .collect(Collectors.toList());
     }

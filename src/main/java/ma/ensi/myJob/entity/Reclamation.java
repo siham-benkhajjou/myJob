@@ -18,13 +18,26 @@ public class Reclamation {
     @JsonProperty("id")
     private Long idReclamation;
 
+    @JsonProperty("title")
+    private String title;
+
     @JsonProperty("description")
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @JsonProperty("type")
-    private String type;
+    private ReclamationType type;
+
+    @Enumerated(EnumType.STRING)
+    @JsonProperty("status")
+    private ReclamationStatus status = ReclamationStatus.NOUVELLE;
 
     @Temporal(TemporalType.DATE)
     @JsonProperty("date_reclamation")
-    private Date dateReclamation;
+    private Date dateReclamation = new Date();
+
+    @ManyToOne
+    @JoinColumn(name = "recruteur_id")
+    @JsonProperty("recruteur")
+    private Recruteur recruteur;
 }

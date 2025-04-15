@@ -18,7 +18,7 @@
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
+:root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #222222; /* Color for headings, subheadings and title throughout the website */
@@ -1421,3 +1421,72 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+/* === Mes Réclamations Page Custom Styles === */
+
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.custom-card {
+  border: none;
+  border-radius: 20px;
+  height: 300px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--surface-color);
+}
+
+.custom-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+}
+
+.btn-accent:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
+  color: var(--contrast-color);
+}
+
+/* === Formulaire Ajouter Réclamation === */
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.section-title h2::after {
+  content: "";
+  position: absolute;
+  display: none;
+  width: 60px;
+  height: 4px;
+  background-color: var(--heading-color);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+}
+
+.btn-accent:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
+  color: var(--contrast-color);
+}
+

@@ -1,4 +1,4 @@
-package ma.ensi.myJob.service;
+package ma.ensi.myJob.serviceImpl;
 
 import ma.ensi.myJob.entity.Personne;
 import ma.ensi.myJob.entity.Recruteur;
