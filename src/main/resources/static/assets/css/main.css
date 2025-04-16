@@ -1508,8 +1508,12 @@ section,
   overflow-x: hidden;
 }
 
-.page-inscription .container, .page-inscription .row {
-  padding: 0;
-  margin: 0;
+.page-inscription .container {
+  padding: 0 1rem;
+}
+
+.page-inscription .row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
