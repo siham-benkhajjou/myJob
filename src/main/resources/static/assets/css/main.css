@@ -1516,4 +1516,16 @@ section,
   margin-left: 0;
   margin-right: 0;
 }
-
+.custom-btn {
+  background-color: #3cc8b4;
+  color: white;
+  font-weight: 600;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 50px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+.custom-btn:hover {
+  background-color: #34b0a0;
+}

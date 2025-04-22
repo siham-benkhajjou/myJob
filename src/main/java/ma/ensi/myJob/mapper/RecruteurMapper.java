@@ -28,7 +28,6 @@ public class RecruteurMapper {
         r.setLinkedin(dto.getLinkedin());
         r.setNomEntreprise(dto.getNomEntreprise());
         r.setPoste(dto.getPoste());
-        r.setLogoEntreprise(dto.getLogoEntreprise());
         r.setSecteur(dto.getSecteur());
         r.setAdresse(dto.getAdresse());
         r.setSiteWeb(dto.getSiteWeb());

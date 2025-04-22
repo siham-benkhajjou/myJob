@@ -49,7 +49,7 @@ public class RecruteurController implements IRecruteurController {
 
     @Override
     public ResponseEntity<RecruteurDto> updateRecruteur(@PathVariable Long id, @RequestBody RecruteurDto dto) {
-        RecruteurDto updated = recruteurService.updateRecruteur(id, dto);
+        RecruteurDto updated = recruteurService.updateRecruteur(id, dto,null);
         return ResponseEntity.ok(updated);
     }
 

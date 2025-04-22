@@ -98,10 +98,7 @@
 
             <!-- Recruiter Info -->
             <div class="col-lg-5 text-center">
-                <!-- Always show local image -->
-                <img src="/assets/img/profile-img.jpg"
-                     class="img-fluid rounded-circle mb-3"
-                     alt="Photo du Recruteur" />
+                <img th:src="@{${logoPath}}" class="img-fluid rounded-circle mb-3" alt="Photo du Recruteur" />
 
                 <a href="/recruteur/modifier-compte-rec" class="btn custom-btn">
                     Modifier Mon Compte

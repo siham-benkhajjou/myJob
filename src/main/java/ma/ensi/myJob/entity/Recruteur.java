@@ -47,7 +47,8 @@ public class Recruteur extends Personne {
         this.setRole(Role.RECRUTEUR);
     }
 
-    @OneToMany(mappedBy = "recruteur", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "recruteur", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonProperty("reclamations")
     private List<Reclamation> reclamations = new ArrayList<>();
+
 }

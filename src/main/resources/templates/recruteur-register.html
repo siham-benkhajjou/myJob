@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription Recruteur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/main.css" rel="stylesheet">
+</head>
+<body class="page-inscription">
+
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <a href="/recruteur-home.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
+        <div class="header-social-links">
+            <a href="/login" class="btn btn-accent text-white">Login</a>
+        </div>
+    </div>
+</header>
+
+<div class="section-title text-center mb-0" style="background-color: #f7f5f4; padding-bottom: 0;">
+    <h2>Inscription Recruteur</h2>
+</div>
+
+<main class="py-4" style="background-color: #f7f5f4;">
+    <div class="container">
+
+        <div th:if="${emailError}" class="alert alert-danger text-center">
+            <span th:text="${emailError}"></span>
+        </div>
+        <div th:if="${ageError}" class="alert alert-danger text-center">
+            <span th:text="${ageError}"></span>
+        </div>
+
+        <form action="/recruteur" method="POST" enctype="multipart/form-data" class="bg-white p-4 shadow rounded">
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label for="nom" class="form-label">Nom *</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="prenom" class="form-label">Prénom *</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="cin" class="form-label">CIN *</label>
+                    <input type="text" class="form-control" id="cin" name="cin" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="userName" class="form-label">Nom d'utilisateur *</label>
+                    <input type="text" class="form-control" id="userName" name="userName" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="mdp" class="form-label">Mot de passe *</label>
+                    <input type="password" class="form-control" id="mdp" name="mdp" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="numTele" class="form-label">Téléphone *</label>
+                    <input type="number" class="form-control" id="numTele" name="numTele" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="dateDeNaissance" class="form-label">Date de naissance *</label>
+                    <input type="date" class="form-control" id="dateDeNaissance" name="dateDeNaissance" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="poste" class="form-label">Poste *</label>
+                    <input type="text" class="form-control" id="poste" name="poste" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="linkedin" class="form-label">Profil LinkedIn</label>
+                    <input type="url" class="form-control" id="linkedin" name="linkedin">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="nomEntreprise" class="form-label">Nom de l'entreprise *</label>
+                    <input type="text" class="form-control" id="nomEntreprise" name="nomEntreprise" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="secteur" class="form-label">Secteur</label>
+                    <input type="text" class="form-control" id="secteur" name="secteur">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="adresse" class="form-label">Adresse</label>
+                    <input type="text" class="form-control" id="adresse" name="adresse">
+                </div>
+                <div class="col-md-6">
+                    <label for="siteWeb" class="form-label">Site web</label>
+                    <input type="url" class="form-control" id="siteWeb" name="siteWeb">
+                </div>
+
+                <div class="col-12">
+                    <label for="logoEntreprise" class="form-label">Logo de l'entreprise</label>
+                    <input type="file" class="form-control" id="logoEntreprise" name="logoFile" accept="image/*">
+                </div>
+
+                <div class="col-12">
+                    <label for="description" class="form-label">Description de l'entreprise</label>
+                    <textarea class="form-control" id="description" name="description" rows="4" maxlength="2000"></textarea>
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-accent text-white px-5">S'inscrire</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

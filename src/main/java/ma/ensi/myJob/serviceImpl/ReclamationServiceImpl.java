@@ -25,9 +25,11 @@ public class ReclamationServiceImpl implements IReclamationService {
     private RecruteurRepository recruteurRepository;
 
     @Override
-    public void ajouterReclamation(ReclamationDTO dto, String email) {
-        Recruteur recruteur = recruteurRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Recruteur not found with email: " + dto.getRecruteurId()));
+    public void ajouterReclamation(ReclamationDTO dto, String name) {
+        Recruteur recruteur = recruteurRepository.findByUserName(name).get();
+        if (recruteur == null) {
+            throw new RuntimeException("Recruteur not found with user name: " + name);
+        }
         dto.setRecruteurId(recruteur.getId());
         dto.setStatus(ReclamationStatus.NOUVELLE);
         Reclamation entity = ReclamationMapper.toEntity(dto, recruteur);

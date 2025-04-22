@@ -34,9 +34,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // Check in Recruteur
-        Optional<Recruteur> recruteur = recruteurRepository.findByEmail(email);
-        if (recruteur.isPresent()) {
-            return buildUserDetails(recruteur.get());
+        Recruteur recruteur = recruteurRepository.findByEmail(email);
+        System.out.println("Trying to load user by email: " + email);
+        System.out.println("Recruteur found: " + recruteur);
+
+        if (recruteur != null) {
+            System.out.println("Loaded recruteur: " + recruteur.getUserName());
+            return buildUserDetails(recruteur);
         }
         ///fixme
         // Check in Candidat
@@ -55,6 +59,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private UserDetails buildUserDetails(Personne personne) {
+        System.out.println("you creds are");
+        System.out.println(personne.getUserName());
+        System.out.println(personne.getMdp());
         return new User(
                 personne.getUserName(),
                 personne.getMdp(),
