@@ -1,5 +1,6 @@
 package ma.ensi.myJob.controllerImpl;
 
+import ma.ensi.myJob.DTO.AnnonceDTO;
 import ma.ensi.myJob.DTO.ReclamationDTO;
 import ma.ensi.myJob.controller.IReclamationController;
 import ma.ensi.myJob.serviceImpl.ReclamationServiceImpl;
@@ -23,6 +24,7 @@ public class ReclamationControllerImpl implements IReclamationController {
     public ResponseEntity<Void> ajouterReclamation(ReclamationDTO dto, String email) {
         reclamationService.ajouterReclamation(dto,email);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
 
     @Override

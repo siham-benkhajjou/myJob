@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>MyJob - Annonces</title>
+    <meta name="description" content="Page des annonces pour MyJob">
+    <meta name="keywords" content="MyJob, annonces, recrutement">
+
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <style>
+        .service-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px 20px;
+            transition: 0.4s;
+            box-shadow: 0px 0 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border-radius: 50%;
+        }
+
+        .service-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .btn-action-icon {
+            background: #fff;
+            border-radius: 50%;
+            padding: 6px 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-action-icon i {
+            color: #84a48b;
+        }
+
+        .btn-edit {
+            color: #7bb28a;
+            border: 1px solid #7bb28a;
+            background-color: #fff;
+        }
+
+        .btn-edit:hover {
+            background-color: #7bb28a;
+            color: #fff;
+        }
+
+        .btn-delete {
+            color: #c96349;
+            border: 1px solid #c96349;
+            background-color: #fff;
+        }
+
+        .btn-delete:hover {
+            background-color: #c96349;
+            color: #fff;
+        }
+
+        .custom-action-btn {
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .custom-action-btn i {
+            margin-right: 4px;
+        }
+        hr.divider {
+            border: none;
+            height: 1px;
+            background-color: #ddd; /* Light gray */
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body class="services-page">
+
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+        <a href="/recruteur/home" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/recruteur/home">home</a></li>
+                <li><a href="/recruteur/mon-compte">Mon Compte</a></li>
+                <li><a href="/recruteur/offres">offre</a></li>
+                <li><a href="/recruteur/annonces" class="active">annonce</a></li>
+                <li><a href="/recruteur/applications">App Reçus</a></li>
+                <li><a href="/recruteur/Reclamation">Soumettre une Réclamation</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link">
+                <i class="bi bi-box-arrow-right"></i> Se déconnecter
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="main">
+    <div class="container py-5">
+        <div class="section-title text-center mb-5">
+            <h2>Nos Annonces</h2>
+        </div>
+
+        <div class="row gy-4">
+
+            <!-- Create Annonce Card -->
+
+            <!-- Create Annonce Card -->
+            <div class="col-lg-4 col-md-6">
+                <a href="/recruteur/annonces/new" class="text-decoration-none text-dark">
+                    <div class="service-box text-center position-relative">
+                        <div class="service-icon mt-4">
+                            <!-- Icon with color #7bb28a applied -->
+                            <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="Add Icon" style="filter: invert(26%) sepia(45%) saturate(230%) hue-rotate(84deg) brightness(95%) contrast(88%);">
+                        </div>
+                        <div class="service-title" style="color: black;">Créer une Annonce</div>
+                    </div>
+                </a>
+            </div>
+
+
+
+
+            <!-- Dynamic Annonce Cards -->
+            <div class="col-lg-4 col-md-6" th:each="annonce : ${annonces}">
+                <div class="service-box position-relative">
+
+                    <!-- Top-left: Date -->
+                    <div class="position-absolute" style="top: 15px; left: 15px; font-size: 12px; color: #555;">
+                        <i class="bi bi-calendar"></i>
+                        <span th:text="${#dates.format(annonce.datePublication, 'dd/MM/yyyy')}">12/04/2025</span>
+                    </div>
+
+                    <!-- Top-right: Consulter -->
+
+                    <a th:href="@{'/recruteur/annonces/' + ${annonce.id}}" class="btn-action-icon position-absolute" style="top: 15px; right: 15px;">
+                        <i class="bi bi-arrow-right-circle-fill"></i>
+                    </a>
+
+                    <!-- Content -->
+                    <div class="service-icon mt-4">
+                        <img src="/assets/img/profile-img.jpg" alt="Profile">
+                    </div>
+                    <div class="service-title mt-2" th:text="${annonce.titre}">Titre Annonce</div>
+
+                    <!-- Bottom buttons -->
+                    <div class="d-flex justify-content-center gap-3 mt-3">
+                        <a th:href="@{'/recruteur/editAnnonce/' + ${annonce.id}}" class="btn btn-edit btn-sm custom-action-btn">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+                        <a th:href="@{'/recruteur/annonces/delete/' + ${annonce.id}}" class="btn btn-delete btn-sm custom-action-btn"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+
+</html>

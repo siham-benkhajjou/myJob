@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" href="assets/css/main.css" rel="stylesheet">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Recruteur Home</title>
+    <title>Consulter Annonce</title>
 
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon">
@@ -25,21 +25,42 @@
     <!-- Main CSS File -->
     <link href="/assets/css/main.css" rel="stylesheet">
 
+    <!-- Custom CSS for Round Button -->
+    <style>
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #7bb28a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 24px;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
+        .return-button:hover {
+            background-color: #6b9f79;
+        }
+    </style>
 </head>
-
-
-
-
 
 <body class="index-page">
 
+<!-- Round Return Button -->
+<a href="javascript:history.back()" class="return-button">
+    <i class="bi bi-arrow-left"></i>
+</a>
+
+<!-- Header -->
 <header id="header" class="header d-flex align-items-center light-background sticky-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-
         <a href="recruteur-home.html" class="logo d-flex align-items-center me-auto me-xl-0">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
-            <!-- <img src="assets/img/logo.png" alt=""> -->
             <h1 class="sitename">MyJob</h1>
         </a>
 
@@ -51,7 +72,6 @@
                 <li><a href="/recruteur/annonces">annance</a></li>
                 <li><a href="/recruteur/applications">App Reçus</a></li>
                 <li><a href="/recruteur/Reclamation">Soumettre une Réclamation</a></li>
-
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -61,30 +81,41 @@
                 <i class="bi bi-box-arrow-right"></i> Se déconnecter
             </a>
         </div>
-
     </div>
 </header>
 
+<!-- Main -->
 <main class="main">
 
-    <!-- Hero Section -->
-page annace
-
+    <!-- Annonce Background Section -->
+    <section class="hero section d-flex align-items-center justify-content-center text-white"
+             style="background-image: url('/assets/img/annancebackground.jpg'); background-size: cover; background-position: center; height: 100vh;">
+        <div class="container text-center" data-aos="fade-up">
+            <h2 class="display-4 mb-4" th:text="${annonce.titre}">Titre de l'annonce</h2>
+            <div class="card mx-auto p-4" style="max-width: 800px; background-color: rgba(255,255,255,0.9); color: #333;">
+                <p><strong>Description :</strong> <span th:text="${annonce.description}">Lorem ipsum dolor sit amet</span></p>
+                <p><strong>Localisation :</strong> <span th:text="${annonce.localisation}">Casablanca</span></p>
+                <p><strong>Date de publication :</strong> <span th:text="${#dates.format(annonce.datePublication, 'dd/MM/yyyy')}">23/04/2025</span></p>
+                <p><strong>Recruteur :</strong> <span th:text="${annonce.recruteur.nom}">XYZ Company</span></p>
+            </div>
+        </div>
+    </section>
 </main>
 
-
 <!-- Scroll Top -->
-<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+</a>
 
 <!-- Preloader -->
 <div id="preloader"></div>
 
+<!-- JS Files -->
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/vendor/aos/aos.js"></script>
 <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
 <script src="/assets/js/main.js"></script>
-
 
 </body>
 

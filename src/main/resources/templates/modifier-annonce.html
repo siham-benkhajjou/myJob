@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modifier Annonce</title>
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <a href="/recruteur/home" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/recruteur/home">Home</a></li>
+                <li><a href="/recruteur/annonces" class="active">Annonces</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link"><i class="bi bi-box-arrow-right"></i> Se déconnecter</a>
+        </div>
+    </div>
+</header>
+
+<main class="main mt-5">
+    <div class="container py-5">
+        <div class="section-title text-center mb-5">
+            <h2>Modifier Annonce</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <form th:action="@{/recruteur/updateAnnonce}" th:object="${annonce}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+                            <div class="mb-4">
+                                <label class="form-label">Titre</label>
+                                <input type="text" class="form-control" th:field="*{titre}" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" th:field="*{description}" rows="5" required></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Localisation</label>
+                                <input type="text" class="form-control" th:field="*{localisation}" required>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="/recruteur/annonces" class="btn btn-outline-secondary me-md-2">Annuler</a>
+                                <button type="submit" class="btn btn-accent">Modifier</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

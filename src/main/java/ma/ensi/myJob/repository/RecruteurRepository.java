@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface RecruteurRepository extends JpaRepository<Recruteur, Long> {
+    Recruteur findByNomEntreprise(String nomEntreprise);
 
     @Query("SELECT r FROM Recruteur r WHERE LOWER(r.email) = LOWER(:email)")
     Recruteur findByEmail(String email);

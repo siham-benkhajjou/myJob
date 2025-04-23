@@ -1,13 +1,9 @@
 package ma.ensi.myJob.controllerImpl;
 
-import ma.ensi.myJob.DTO.ReclamationDTO;
-import ma.ensi.myJob.DTO.RecruteurDto;
-import ma.ensi.myJob.entity.Reclamation;
-import ma.ensi.myJob.entity.Recruteur;
-import ma.ensi.myJob.mapper.RecruteurMapper;
-import ma.ensi.myJob.repository.RecruteurRepository;
-import ma.ensi.myJob.serviceImpl.ReclamationServiceImpl;
-import ma.ensi.myJob.serviceImpl.RecruteurService;
+import ma.ensi.myJob.DTO.*;
+import ma.ensi.myJob.entity.*;
+import ma.ensi.myJob.mapper.*;
+import ma.ensi.myJob.serviceImpl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +19,11 @@ import java.util.List;
 public class RecruteurPageController {
     @Autowired
     RecruteurService recruteurService;
-    @Autowired
-    RecruteurRepository recruteurRepository;
+
     @Autowired
     ReclamationServiceImpl reclamationService;
+    @Autowired
+    private AnnonceServiceImpl annonceServiceImpl;
 
     @GetMapping("/home")
     public String home() {
@@ -50,11 +47,6 @@ public class RecruteurPageController {
     @GetMapping("/offres")
     public String offresPage() {
         return "recruteur-offres";
-    }
-
-    @GetMapping("/annonces")
-    public String annoncesPage() {
-        return "recruteur-annonces";
     }
 
     @GetMapping("/applications")
@@ -153,5 +145,50 @@ public class RecruteurPageController {
         }
         return "redirect:/recruteur/mon-compte";
     }
+    @GetMapping("/annonces")
+    public String annoncePage(Model model, Principal principal) {
+        String name = principal.getName();
+        Recruteur recruteur = recruteurService.findByUsername(name);
+        List<AnnonceDTO> annonces = annonceServiceImpl.getAnnoncesByRecruteurId(recruteur.getId());
+        model.addAttribute("annonces", annonces);
+        return "annonce-list";
+    }
 
+    @GetMapping("/annonces/new")
+    public String showNewAnnonceForm(Model model) {
+        model.addAttribute("annonce", new AnnonceDTO());
+        return "create-annonce";
+    }
+
+    @PostMapping("/addAnnonce")
+    public String addAnnonce(@ModelAttribute AnnonceDTO annonceDTO,
+                             Principal principal,
+                             RedirectAttributes redirectAttributes) {
+        try {
+            annonceServiceImpl.ajouterAnnonce(annonceDTO, principal.getName());
+            redirectAttributes.addFlashAttribute("successMessage", "Annonce ajoutée avec succès!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de l'ajout de l'annonce.");
+        }
+        return "redirect:/recruteur/annonces";
+    }
+    @GetMapping("/editAnnonce/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Annonce annonce = annonceServiceImpl.getAnnonceById(id); // Correct method
+        model.addAttribute("annonce", annonce);
+        return "modifier-annonce"; // your HTML file
+    }
+
+    @PostMapping("/updateAnnonce")
+    public String updateAnnonce(@ModelAttribute Annonce annonce) {
+        annonceServiceImpl.updateAnnonce(annonce);
+        return "redirect:/recruteur/annonces";
+    }
+
+    @GetMapping("/annonces/{id}")
+    public String consulterAnnonce(@PathVariable Long id, Model model) {
+        Annonce annonce = annonceServiceImpl.getAnnonceById(id);
+        model.addAttribute("annonce", annonce);
+        return "consulter-annonce";
+    }
 }

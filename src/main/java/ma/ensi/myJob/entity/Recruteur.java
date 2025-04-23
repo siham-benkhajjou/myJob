@@ -47,8 +47,13 @@ public class Recruteur extends Personne {
         this.setRole(Role.RECRUTEUR);
     }
 
-    @OneToMany(mappedBy = "recruteur", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "recruteur", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonProperty("reclamations")
     private List<Reclamation> reclamations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "recruteur", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonProperty("annonce")
+    private List<Annonce> annonces = new ArrayList<>();
+
 
 }
