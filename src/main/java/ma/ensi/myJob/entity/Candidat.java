@@ -13,9 +13,8 @@ public class Candidat extends Personne{
     @JsonProperty("image")
     private String image;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
-    @JsonProperty("cv")
     private CV cv;
 
     @PrePersist

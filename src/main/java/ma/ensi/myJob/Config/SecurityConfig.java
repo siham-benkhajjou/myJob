@@ -44,7 +44,8 @@ public class SecurityConfig {
                                 "/inscription",
                                 "/recruteur/register",
                                 "/recruteur",
-                                "/candidat/register",
+                                "/candidate/register",
+                                "/candidate",
                                 "/assets/**"
                         ).permitAll()
                         .anyRequest().authenticated()

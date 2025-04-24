@@ -15,20 +15,23 @@ public class CV {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String template;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cv_id")
+    private List<Diplome> diplomes;
 
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
-    private List<Experience> experiences = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cv_id")
+    private List<Langue> langues;
 
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
-    private List<Competence> competences = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cv_id")
+    private List<Certificat> certificats;
 
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
-    private List<Langue> langues = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cv_id")
+    private List<Experience> experiences;
 
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
-    private List<Certificat> certificats = new ArrayList<>();
-
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
-    private List<Diplome> diplomes = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cv_id")
+    private List<Competence> competences;
 }
