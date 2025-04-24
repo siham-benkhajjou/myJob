@@ -1,0 +1,26 @@
+<!-- templates/recruteur/offre-list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des Offres</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h1>Mes Offres</h1>
+
+<a th:href="@{/recruteur/offres/new}" class="btn">Créer une nouvelle offre</a>
+
+<div class="offre-cards">
+    <div th:each="offre : ${offres}" class="card">
+        <h2 th:text="${offre.intitule}"></h2>
+        <p><strong>Type:</strong> <span th:text="${offre.type}"></span></p>
+        <p><strong>Lieu:</strong> <span th:text="${offre.lieu}"></span></p>
+        <p><strong>Statut:</strong> <span th:text="${offre.statut}"></span></p>
+
+        <a th:href="@{'/recruteur/offres/edit/' + ${offre.id}}">Modifier</a> |
+        <a th:href="@{'/recruteur/offres/delete/' + ${offre.id}}" onclick="return confirm('Supprimer cette offre ?')">Supprimer</a>
+    </div>
+</div>
+
+</body>
+</html>

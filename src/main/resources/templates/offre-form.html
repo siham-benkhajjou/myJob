@@ -1,0 +1,37 @@
+<!-- templates/recruteur/offre-form.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Créer / Modifier une Offre</title>
+</head>
+<body>
+<h1 th:text="${offre.id == null ? 'Créer une Offre' : 'Modifier l\'Offre'}"></h1>
+
+<form th:action="@{${offre.id == null} ? '/recruteur/offres/save' : '/recruteur/offres/update/' + ${offre.id}}" method="post">
+    <input type="hidden" name="publierParId" th:value="${recruteurId}" />
+
+    <label>Intitulé:</label>
+    <input type="text" name="intitule" th:value="${offre.intitule}" required />
+
+    <label>Type:</label>
+    <select name="type">
+        <option value="Stage" th:selected="${offre.type == 'Stage'}">Stage</option>
+        <option value="Travail" th:selected="${offre.type == 'Travail'}">Travail</option>
+    </select>
+
+    <label>Description:</label>
+    <textarea name="description" th:text="${offre.description}"></textarea>
+
+    <label>Date d'expiration:</label>
+    <input type="date" name="dateExpiration" th:value="${offre.dateExpiration}" />
+
+    <label>Statut:</label>
+    <input type="text" name="statut" th:value="${offre.statut}" />
+
+    <label>Lieu:</label>
+    <input type="text" name="lieu" th:value="${offre.lieu}" />
+
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

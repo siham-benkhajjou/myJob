@@ -55,5 +55,8 @@ public class Recruteur extends Personne {
     @JsonProperty("annonce")
     private List<Annonce> annonces = new ArrayList<>();
 
+    @OneToMany(mappedBy = "recruteur", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonProperty("offre")
+    private List<Offre> offre = new ArrayList<>();
 
 }
