@@ -1529,3 +1529,44 @@ section,
 .custom-btn:hover {
   background-color: #34b0a0;
 }
+
+.card-section {
+  display: none;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.card-section.active {
+  display: block;
+}
+.navigation-buttons {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.centered-title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.form-select {
+  background-color: #fff;
+}
+.btn-accent {
+  background-color: #88c99c;
+  border: none;
+}
+
+.required input:invalid {
+  border-color: red;
+}
+
+.is-invalid {
+  border-color: red !important;
+}
+.btn-outline-primary { color: #88c99c; border-color: #88c99c; }
+.btn-outline-primary:hover { background-color: #88c99c; color: white; }
+

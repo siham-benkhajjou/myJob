@@ -25,8 +25,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             String role = authority.getAuthority();
 
             switch (role) {
-                case "ETUDIANT":
-                    response.sendRedirect("/etudiant/home");
+                case "CANDIDAT":
+                    response.sendRedirect("/candidate/home");
                     return;
                 case "RECRUTEUR":
                     response.sendRedirect("/recruteur/home");

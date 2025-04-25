@@ -86,6 +86,11 @@ public class RecruteurService implements IRecruteurService {
     }
 
     @Override
+    public boolean usernameExists(String userName) {
+        return recruteurRepository.findByuserName(userName) != null;
+    }
+
+    @Override
     public String saveLogoFile(MultipartFile file, Long id) {
         try {
             String fileName = "profile.png";

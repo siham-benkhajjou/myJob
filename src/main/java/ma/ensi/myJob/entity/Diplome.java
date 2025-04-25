@@ -2,6 +2,8 @@ package ma.ensi.myJob.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 @Data
@@ -16,10 +18,10 @@ public class Diplome {
     private String titre;
     private String institution;
 
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDelivrance;
 
-    private Boolean statut;
+    private Boolean statut = false;
 
     @ManyToOne
     @JoinColumn(name = "cv_id")

@@ -4,6 +4,7 @@ import ma.ensi.myJob.DTO.*;
 import ma.ensi.myJob.entity.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class CVMapper {
@@ -62,7 +63,15 @@ public class CVMapper {
         dto.setStatut(d.getStatut());
         return dto;
     }
-
+    public static CV toEntity(List<ExperienceDto> experiences, List<CompetenceDto> competences,List<LangueDto> langues, List<CertificatDto> certificats, List<DiplomeDto> diplomes) {
+        CVDto dto = new CVDto();
+        dto.setExperiences(experiences);
+        dto.setCompetences(competences);
+        dto.setLangues(langues);
+        dto.setCertificats(certificats);
+        dto.setDiplomes(diplomes);
+        return toEntity(dto);
+    }
     public static CV toEntity(CVDto dto) {
         if (dto == null) return null;
 

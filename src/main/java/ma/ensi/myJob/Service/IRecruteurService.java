@@ -18,5 +18,6 @@ public interface IRecruteurService {
     Recruteur findByEmail(String email);
     Recruteur findByUsername(String username);
     boolean emailExists(String email);
+    boolean usernameExists(String userName);
     String saveLogoFile(MultipartFile file, Long id);
 }

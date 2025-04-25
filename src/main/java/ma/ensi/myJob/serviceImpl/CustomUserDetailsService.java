@@ -1,9 +1,9 @@
 package ma.ensi.myJob.serviceImpl;
 
+import ma.ensi.myJob.entity.Candidat;
 import ma.ensi.myJob.entity.Personne;
 import ma.ensi.myJob.entity.Recruteur;
 import ma.ensi.myJob.entity.Role;
-import ma.ensi.myJob.repository.RecruteurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,13 +15,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private RecruteurRepository recruteurRepository;
+    private RecruteurService recruteurService;
+
+    @Autowired
+    private CandidatService candidatService;
 
     // todo
     // create those classes then import
@@ -34,19 +36,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // Check in Recruteur
-        Recruteur recruteur = recruteurRepository.findByEmail(email);
+        Recruteur recruteur = recruteurService.findByEmail(email);
 
         if (recruteur != null) {
             System.out.println("Loaded recruteur: " + recruteur.getUserName());
             return buildUserDetails(recruteur);
         }
+// Check in Candidat
+        Candidat candidat = candidatService.findByEmail(email);
+        if(candidat != null) {
+            System.out.println("Loaded candidate: " + candidat.getUserName());
+            return buildUserDetails(candidat);
+        }
         ///fixme
-        // Check in Candidat
-        //        Optional<Candidat> candidat = candidatRepository.findByEmail(email);
-        //        if (candidat.isPresent()) {
-        //            return buildUserDetails(candidat.get());
-        //        }
-        //
+
         //        // Check in Admin
         //        Optional<Admin> admin = adminRepository.findByEmail(email);
         //        if (admin.isPresent()) {
