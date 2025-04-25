@@ -40,4 +40,9 @@ public class Reclamation {
     @JoinColumn(name = "recruteur_id")
     @JsonProperty("recruteur")
     private Recruteur recruteur;
+
+    @ManyToOne
+    @JoinColumn(name = "candidat_id")
+    @JsonProperty("candidat")
+    private Candidat candidat;
 }
