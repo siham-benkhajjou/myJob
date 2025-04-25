@@ -15,6 +15,7 @@ public class ReclamationDTO {
     private ReclamationStatus status;
     private Date dateReclamation;
     private Long recruteurId;
+    private Long candidatId;
 
     public String getTypeDisplayName() {
         return type != null ? type.getDisplayName() : "";

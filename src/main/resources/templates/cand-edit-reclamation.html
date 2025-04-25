@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modifier Réclamation</title>
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+        <a href="/candidate/home" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/candidate/home">home</a></li>
+                <li><a href="/candidate/mon-compte">Mon Compte</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Offres</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/candidate/stage">Stage</a></li>
+                        <li><a href="/candidate/travaille">Travaille</a></li>
+                    </ul>
+                </li>
+                <li><a href="/candidate/annonces">annance</a></li>
+                <li><a href="/candidate/applications">Mes Applications</a></li>
+                <li><a href="/candidate/universite">Université</a></li>
+                <li><a href="/candidate/Reclamation" class="active">Réclamation</a></li>
+            </ul>
+        </nav>
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link"><i class="bi bi-box-arrow-right"></i> Se déconnecter</a>
+        </div>
+    </div>
+</header>
+
+<main class="main mt-5">
+    <div class="container py-5">
+        <div class="section-title text-center mb-5">
+            <h2>Modifier Réclamation</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <form th:action="@{/candidate/updateReclamation}" method="post" th:object="${reclamation}">
+                            <input type="hidden" th:field="*{idReclamation}" />
+
+                            <div class="mb-4">
+                                <label for="title" class="form-label">Titre</label>
+                                <input type="text" class="form-control" th:field="*{title}" id="title" required />
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="type" class="form-label">Type de Réclamation</label>
+                                <select class="form-select" th:field="*{type}" id="type" required>
+                                    <option value="">Sélectionnez un type</option>
+                                    <option value="PROBLEME_TECHNIQUE">Problème technique</option>
+                                    <option value="PLAINTE">Plainte</option>
+                                    <option value="QUESTION">Question</option>
+                                    <option value="COMPTE">Problème de compte</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" th:field="*{description}" id="description" rows="5" required></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="/candidate/Reclamation" class="btn btn-outline-secondary me-md-2">
+                                    <i class="bi bi-arrow-left"></i> Annuler
+                                </a>
+                                <button type="submit" class="btn btn-accent">
+                                    <i class="bi bi-save"></i> Enregistrer
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

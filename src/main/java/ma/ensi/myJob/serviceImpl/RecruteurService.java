@@ -119,5 +119,10 @@ public class RecruteurService implements IRecruteurService {
         }
         return "/assets/img/profile-img.jpg";
     }
+
+    public boolean existsById(Long id){
+        return recruteurRepository.existsById(id);
+    }
+
 }
 

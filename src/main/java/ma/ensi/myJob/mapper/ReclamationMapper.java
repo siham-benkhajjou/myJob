@@ -1,6 +1,7 @@
 package ma.ensi.myJob.mapper;
 
 import ma.ensi.myJob.DTO.ReclamationDTO;
+import ma.ensi.myJob.entity.Candidat;
 import ma.ensi.myJob.entity.Reclamation;
 import ma.ensi.myJob.entity.Recruteur;
 
@@ -30,6 +31,17 @@ public class ReclamationMapper {
         reclamation.setStatus(dto.getStatus());
         reclamation.setDateReclamation(dto.getDateReclamation());
         reclamation.setRecruteur(recruteur);
+        return reclamation;
+    }
+    public static Reclamation toEntity(ReclamationDTO dto, Candidat candidat) {
+        Reclamation reclamation = new Reclamation();
+        reclamation.setIdReclamation(dto.getIdReclamation());
+        reclamation.setTitle(dto.getTitle());
+        reclamation.setDescription(dto.getDescription());
+        reclamation.setType(dto.getType());
+        reclamation.setStatus(dto.getStatus());
+        reclamation.setDateReclamation(dto.getDateReclamation());
+        reclamation.setCandidat(candidat);
         return reclamation;
     }
 }
