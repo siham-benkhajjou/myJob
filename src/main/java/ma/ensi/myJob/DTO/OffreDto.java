@@ -1,6 +1,8 @@
 package ma.ensi.myJob.DTO;
 
 import lombok.Data;
+import ma.ensi.myJob.entity.Recruteur;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -13,13 +15,22 @@ public class OffreDto {
     private LocalDate dateExpiration;
     private String statut;
     private String lieu;
-    private Long recruteurId; // Foreign key for Recruteur
+    private Long recruteurId;
 
     private LocalDate datePublication;
+
+    private String nomEntreprise;
 
     public void setDatePublication(Date datePublication) {
 
     }
 
+    public String getNomEntreprise(Recruteur recruteur) {
+        return recruteur != null ? recruteur.getNomEntreprise() : "N/A";
+    }
+
 
 }
+
+
+

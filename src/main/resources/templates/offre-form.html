@@ -1,37 +1,51 @@
-<!-- templates/recruteur/offre-form.html -->
+<!-- templates/offre-form.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Créer / Modifier une Offre</title>
+    <meta charset="UTF-8">
+    <title>Créer une Offre</title>
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-<h1 th:text="${offre.id == null ? 'Créer une Offre' : 'Modifier l\'Offre'}"></h1>
+<div class="container">
+    <h1 th:text="${offre.id != null} ? 'Modifier Offre' : 'Créer une Nouvelle Offre'">Créer une Offre</h1>
 
-<form th:action="@{${offre.id == null} ? '/recruteur/offres/save' : '/recruteur/offres/update/' + ${offre.id}}" method="post">
-    <input type="hidden" name="publierParId" th:value="${recruteurId}" />
+    <form th:action="@{/recruteur/addOffre}" method="post" th:object="${offre}">
+        <div class="form-group">
+            <label for="intitule">Intitulé</label>
+            <input type="text" id="intitule" th:field="*{intitule}" class="form-control" required />
+        </div>
 
-    <label>Intitulé:</label>
-    <input type="text" name="intitule" th:value="${offre.intitule}" required />
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" th:field="*{description}" class="form-control" rows="4" required></textarea>
+        </div>
 
-    <label>Type:</label>
-    <select name="type">
-        <option value="Stage" th:selected="${offre.type == 'Stage'}">Stage</option>
-        <option value="Travail" th:selected="${offre.type == 'Travail'}">Travail</option>
-    </select>
+        <div class="form-group">
+            <label for="lieu">Lieu</label>
+            <input type="text" id="lieu" th:field="*{lieu}" class="form-control" required />
+        </div>
 
-    <label>Description:</label>
-    <textarea name="description" th:text="${offre.description}"></textarea>
+        <div class="form-group">
+            <label for="type">Type de Contrat</label>
+            <input type="text" id="type" th:field="*{type}" class="form-control" required />
+        </div>
 
-    <label>Date d'expiration:</label>
-    <input type="date" name="dateExpiration" th:value="${offre.dateExpiration}" />
+        <div class="form-group">
+            <label for="dateExpiration">Date d'expiration</label>
+            <input type="date" id="dateExpiration" th:field="*{dateExpiration}" class="form-control" />
+        </div>
 
-    <label>Statut:</label>
-    <input type="text" name="statut" th:value="${offre.statut}" />
+        <div class="form-group">
+            <label for="statut">Statut</label>
+            <input type="text" id="statut" th:field="*{statut}" class="form-control" />
+        </div>
 
-    <label>Lieu:</label>
-    <input type="text" name="lieu" th:value="${offre.lieu}" />
-
-    <button type="submit">Enregistrer</button>
-</form>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+            <a th:href="@{/recruteur/offres}" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>

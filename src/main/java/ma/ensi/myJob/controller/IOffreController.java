@@ -9,20 +9,17 @@ import java.util.List;
 public interface IOffreController {
 
     @PostMapping("/add")
-    ResponseEntity<Void> createOffre(@RequestBody OffreDto dto, @RequestParam Long recruteurId);
+    ResponseEntity<Void> addOffre(@RequestBody OffreDto dto, @RequestParam String email);
 
     @GetMapping("/all")
     ResponseEntity<List<OffreDto>> getAllOffres();
 
     @GetMapping("/{id}")
-    ResponseEntity<OffreDto> getOffreById(@PathVariable Long id);
-
-    @PutMapping("/update/{id}")
-    ResponseEntity<OffreDto> updateOffre(@PathVariable Long id, @RequestBody OffreDto dto);
+    ResponseEntity<OffreDto> consulterOffre(@PathVariable Long id);
 
     @DeleteMapping("/delete/{id}")
-    ResponseEntity<Void> deleteOffre(@PathVariable Long id);
+    ResponseEntity<Void> supprimerOffre(@PathVariable Long id);
 
     @GetMapping("/recruteur/{recruteurId}")
-    ResponseEntity<List<OffreDto>> getOffresByRecruteur(@PathVariable Long recruteurId);
+    ResponseEntity<List<OffreDto>> getOffresByRecruteurId(@PathVariable Long recruteurId);
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consulter Offre</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h2>Détails de l'Offre</h2>
+
+<div>
+    <p><strong>Intitulé:</strong> <span th:text="${offre.intitule}"></span></p>
+    <p><strong>Type:</strong> <span th:text="${offre.type}"></span></p>
+    <p><strong>Description:</strong> <span th:text="${offre.description}"></span></p>
+    <p><strong>Lieu:</strong> <span th:text="${offre.lieu}"></span></p>
+    <p><strong>Date d’expiration:</strong> <span th:text="${offre.dateExpiration}"></span></p>
+    <p><strong>Statut:</strong> <span th:text="${offre.statut}"></span></p>
+    <p><strong>Date de publication:</strong> <span th:text="${offre.datePublication}"></span></p>
+</div>
+
+<a th:href="@{/recruteur/offres}">Retour à la liste des offres</a>
+</body>
+</html>

@@ -20,7 +20,12 @@ public class OffreMapper {
         dto.setDateExpiration(offre.getDateExpiration());
         dto.setStatut(offre.getStatut());
         dto.setLieu(offre.getLieu());
-        dto.setRecruteurId(offre.getRecruteur() != null ? offre.getRecruteur().getId() : null);
+
+        if (offre.getRecruteur() != null) {
+            dto.setRecruteurId(offre.getRecruteur().getId());
+            dto.setNomEntreprise(offre.getRecruteur().getNomEntreprise()); // ✅ Add this line
+        }
+
         return dto;
     }
 

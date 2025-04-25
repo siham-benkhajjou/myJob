@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Modifier Offre</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h2>Modifier une Offre</h2>
+
+<form th:action="@{/recruteur/updateOffre}" method="post" th:object="${offre}">
+  <input type="hidden" th:field="*{id}" />
+
+  <label>Intitulé:</label>
+  <input type="text" th:field="*{intitule}" required /><br/>
+
+  <label>Type:</label>
+  <select th:field="*{type}">
+    <option value="Stage">Stage</option>
+    <option value="Travail">Travail</option>
+  </select><br/>
+
+  <label>Description:</label>
+  <textarea th:field="*{description}" required></textarea><br/>
+
+  <label>Lieu:</label>
+  <input type="text" th:field="*{lieu}" /><br/>
+
+  <label>Date d’expiration:</label>
+  <input type="date" th:field="*{dateExpiration}" /><br/>
+
+  <label>Statut:</label>
+  <input type="text" th:field="*{statut}" /><br/>
+
+  <button type="submit">Enregistrer les modifications</button>
+</form>
+
+<a th:href="@{/recruteur/offres}">Annuler</a>
+</body>
+</html>

@@ -194,77 +194,77 @@ public class RecruteurPageController {
         model.addAttribute("annonce", annonce);
         return "consulter-annonce";
     }
-
     @GetMapping("/offres")
-    public String viewAllOffres(Model model, Principal principal) {
-        String userName = principal.getName();
-        // Assuming you have a method to get recruteur by username
-        Long recruteurId = recruteurService.findByUsername(userName).getId();
-        model.addAttribute("offres", offreServiceImpl.getAllOffresByRecruteur(recruteurId));
-        return "offre-list"; // A Thymeleaf template to display the offers
+    public String offreList(Model model, Principal principal) {
+        String name = principal.getName();
+        Recruteur recruteur = recruteurService.findByUsername(name);
+        List<OffreDto> offres = offreServiceImpl.getOffresByRecruteurId(recruteur.getId());
+        model.addAttribute("offres", offres);
+        return "offre-list";
     }
 
-    // Show the form to create a new offer
     @GetMapping("/offres/new")
     public String showNewOffreForm(Model model) {
         model.addAttribute("offre", new OffreDto());
-        return "create-offre"; // The template for creating a new offer
+        return "offre-form";
     }
 
-    // Add a new offer
-    @PostMapping("/offres/add")
-    public String addOffre(@ModelAttribute OffreDto offreDto,
+
+
+    @PostMapping("/addOffre")
+    public String addOffre(@ModelAttribute("offre") OffreDto offreDto,
                            Principal principal,
                            RedirectAttributes redirectAttributes) {
         try {
-            String userName = principal.getName();
-            Long recruteurId = recruteurService.findByUsername(userName).getId();
-            offreServiceImpl.createOffre(offreDto, recruteurId);
-            redirectAttributes.addFlashAttribute("successMessage", "Offre ajoutée avec succès!");
+            // Appeler le service pour sauvegarder l'offre et récupérer le DTO de l'offre
+            OffreDto savedOffreDto = offreServiceImpl.ajouterOffre(offreDto, principal.getName());
+
+            redirectAttributes.addFlashAttribute("successMessage", "Offre ajoutée avec succès !");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de l'ajout de l'offre.");
         }
+
         return "redirect:/recruteur/offres";
     }
-
-    // Show the form to edit an existing offer
+    // Page to load the form
     @GetMapping("/offres/edit/{id}")
-    public String showEditOffreForm(@PathVariable Long id, Model model) {
-        OffreDto offreDto = offreServiceImpl.getOffreById(id);
-        model.addAttribute("offre", offreDto);
-        return "edit-offre"; // Template for editing the offer
+    public String showModifierOffreForm(@PathVariable Long id, Model model) {
+        OffreDto offre = offreServiceImpl.consulterOffre(id);
+        model.addAttribute("offre", offre);
+        return "modifier-offre";
     }
 
-    // Update an existing offer
-    @PostMapping("/offres/update/{id}")
-    public String updateOffre(@PathVariable Long id, @ModelAttribute OffreDto offreDto,
+    // Form submission
+    @PostMapping("/updateOffre")
+    public String updateOffre(@ModelAttribute OffreDto offreDto,
+                              Principal principal,
                               RedirectAttributes redirectAttributes) {
         try {
-            offreServiceImpl.updateOffre(id, offreDto);
-            redirectAttributes.addFlashAttribute("successMessage", "Offre modifiée avec succès!");
+            offreDto = offreServiceImpl.modifierOffre(offreDto);
+            redirectAttributes.addFlashAttribute("successMessage", "Offre modifiée avec succès !");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la modification de l'offre.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la modification.");
         }
         return "redirect:/recruteur/offres";
     }
 
-    // Delete an offer
+    @GetMapping("/offres/{id}")
+    public String consulterOffre(@PathVariable Long id, Model model) {
+        OffreDto offre = offreServiceImpl.consulterOffre(id);
+        model.addAttribute("offre", offre);
+        return "consulter-offre";
+    }
+
     @PostMapping("/offres/delete/{id}")
     public String deleteOffre(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            offreServiceImpl.deleteOffre(id);
+            offreServiceImpl.supprimerOffre(id);
             redirectAttributes.addFlashAttribute("successMessage", "Offre supprimée avec succès!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la suppression de l'offre.");
         }
-        return "redirect:/recruteur/offres";
+        return "redirect:/recruteur/offres"; // Redirects back to the offers list
     }
 
-
-
-    @GetMapping("/applications")
-    public String applicationsPage() {
-        return "recruteur-applications";
-    }
 }
 

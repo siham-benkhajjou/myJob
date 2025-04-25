@@ -1,26 +1,46 @@
-<!-- templates/recruteur/offre-list.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Liste des Offres</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Mes Offres</h1>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Mes Offres</h2>
+        <a href="/recruteur/offres/new" class="btn btn-success">Créer une nouvelle offre</a>
+    </div>
 
-<a th:href="@{/recruteur/offres/new}" class="btn">Créer une nouvelle offre</a>
+    <div class="row">
+        <div class="col-md-4 mb-4" th:each="offre : ${offres}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${offre.intitule}">Titre de l'offre</h5>
+                    <p class="card-text"><strong>Type :</strong> <span th:text="${offre.type}">Type</span></p>
+                    <p class="card-text"><strong>Lieu :</strong> <span th:text="${offre.lieu}">Lieu</span></p>
+                    <p class="card-text"><strong>Entreprise :</strong>
+                        <span th:text="${offre.nomEntreprise != null ? offre.nomEntreprise : 'N/A'}">Entreprise</span>
+                    </p>
+                </div>
 
-<div class="offre-cards">
-    <div th:each="offre : ${offres}" class="card">
-        <h2 th:text="${offre.intitule}"></h2>
-        <p><strong>Type:</strong> <span th:text="${offre.type}"></span></p>
-        <p><strong>Lieu:</strong> <span th:text="${offre.lieu}"></span></p>
-        <p><strong>Statut:</strong> <span th:text="${offre.statut}"></span></p>
-
-        <a th:href="@{'/recruteur/offres/edit/' + ${offre.id}}">Modifier</a> |
-        <a th:href="@{'/recruteur/offres/delete/' + ${offre.id}}" onclick="return confirm('Supprimer cette offre ?')">Supprimer</a>
+                <div class="card-footer text-center">
+                    <a th:href="@{'/recruteur/offres/' + ${offre.id}}">
+                        <button class="btn btn-outline-info btn-sm">Consulter</button>
+                    </a>
+                    <a th:href="@{'/recruteur/offres/edit/' + ${offre.id}}">
+                        <button class="btn btn-outline-warning btn-sm">Modifier</button>
+                    </a>
+                    <form th:action="@{'/recruteur/offres/delete/' + ${offre.id}}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?');">
+                            Supprimer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 </body>
 </html>
