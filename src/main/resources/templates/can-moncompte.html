@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Compte Candidat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <style>
+        .custom-btn {
+            background-color: #3cc8b4;
+            color: white;
+            font-weight: 600;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .custom-btn:hover {
+            background-color: #34b0a0;
+            color: white;
+            text-decoration: none;
+        }
+
+        .section-title {
+            padding: 20px 0;
+            background-color: #f7f5f4;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+
+        .language-item {
+            margin-bottom: 10px;
+        }
+
+        .language-level {
+            font-style: italic;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body class="about-page">
+
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+        <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/candidate/home">home</a></li>
+                <li><a href="/candidate/mon-compte" class="active">Mon Compte</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Offres</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/candidate/stage">Stage</a></li>
+                        <li><a href="/candidate/travaille">Travaille</a></li>
+                    </ul>
+                </li>
+                <li><a href="/candidate/annonces">annance</a></li>
+                <li><a href="/candidate/applications">Mes Applications</a></li>
+                <li><a href="/candidate/universite">Université</a></li>
+                <li><a href="/candidate/Reclamation">Réclamation</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link">
+                <i class="bi bi-box-arrow-right"></i> Déconnexion
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<main class="main">
+    <div class="section-title text-center mb-0" style="background-color: #f7f5f4;">
+        <h2>Mon Compte</h2>
+    </div>
+
+    <div class="container py-5" data-aos="fade-up">
+        <div class="row justify-content-center align-items-start g-5">
+            <div class="col-lg-4 text-center">
+                <img th:src="@{${logoPath}}" class="img-fluid rounded-circle mb-3" style="width: 200px; height: 200px; object-fit: cover;" alt="Photo du Candidat" />
+
+                <h3 th:text="${candidate.prenom + ' ' + candidate.nom}">Prénom Nom</h3>
+                <p class="fst-italic" th:text="${candidate.fonctionnement}">Fonction</p>
+
+                <a href="/candidate/modifier-compte" class="btn custom-btn mt-3">
+                    Modifier Mon Compte
+                </a>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="info-card">
+                    <h4>Informations Personnelles</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-chevron-right"></i> <strong>CIN:</strong> <span th:text="${candidate.cin}">XXXXXX</span></li>
+                        <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span th:text="${candidate.email}">email@example.com</span></li>
+                        <li><i class="bi bi-chevron-right"></i> <strong>Nom d'utilisateur:</strong> <span th:text="${candidate.userName}">username</span></li>
+                        <li><i class="bi bi-chevron-right"></i> <strong>Téléphone:</strong> <span th:text="${candidate.numTele}">06XXXXXXXX</span></li>
+                    </ul>
+                </div>
+
+                <div class="info-card" th:if="${not #lists.isEmpty(candidate.cv.diplomes)}">
+                    <h4>Formation</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3" th:each="diplome, iterStat : ${candidate.cv.diplomes}" th:if="${diplome.statut}">
+                            <div class="border-start border-3 border-primary ps-3">
+                                <h5 th:text="${diplome.titre}">Diplôme</h5>
+                                <p class="mb-1" th:text="${diplome.institution}">Établissement</p>
+                                <small class="text-muted" th:text="${#dates.format(diplome.dateDelivrance, 'MMMM yyyy')}">Date</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card" th:if="${not #lists.isEmpty(candidate.cv.certificats)}">
+                    <h4>Certificats</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3" th:each="certificat, iterStat : ${candidate.cv.certificats}" th:if="${certificat.statut}">
+                            <div class="border-start border-3 border-success ps-3">
+                                <h5 th:text="${certificat.titre}">Certificat</h5>
+                                <p class="mb-1" th:text="${certificat.organisation}">Organisation</p>
+                                <small class="text-muted" th:text="${#dates.format(certificat.dateDelivrance, 'MMMM yyyy')}">Date</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card" th:if="${not #lists.isEmpty(candidate.cv.experiences)}">
+                    <h4>Expériences Professionnelles</h4>
+                    <div th:each="experience, iterStat : ${candidate.cv.experiences}">
+                        <div class="border-start border-3 border-info ps-3 mb-3">
+                            <h5 th:text="${experience.type}">Type d'expérience</h5>
+                            <p class="mb-1">
+                                <span th:text="${#dates.format(experience.dateDebut, 'MMMM yyyy')}">Date début</span> -
+                                <span th:text="${experience.dateFin != null} ? ${#dates.format(experience.dateFin, 'MMMM yyyy')} : 'Présent'">Date fin</span>
+                            </p>
+                            <p th:text="${experience.description}">Description de l'expérience</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="info-card" th:if="${not #lists.isEmpty(candidate.cv.competences)}">
+                    <h4>Compétences</h4>
+                    <div th:each="competence, iterStat : ${candidate.cv.competences}">
+                        <div class="skill-item">
+                            <div class="skill-name" th:text="${competence.nom}">Compétence</div>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" role="progressbar"
+                                     th:attr="aria-valuenow=${competence.pourcentage}, style='width: ' + ${competence.pourcentage} + '%'"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    <span th:text="${competence.pourcentage} + '%'">50%</span>
+                                </div>
+                            </div>
+                            <small th:text="${competence.description}">Description de la compétence</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card" th:if="${not #lists.isEmpty(candidate.cv.langues)}">
+                    <h4>Langues</h4>
+                    <div th:each="langue, iterStat : ${candidate.cv.langues}">
+                        <div class="language-item">
+                            <strong th:text="${langue.nom}">Langue</strong>
+                            <span class="language-level" th:text="'(' + ${langue.niveau} + ')'">(Niveau)</span>
+                            <span th:if="${langue.isMaitrise}" class="badge bg-success ms-2">Maîtrisé</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+<div id="preloader"></div>
+
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>

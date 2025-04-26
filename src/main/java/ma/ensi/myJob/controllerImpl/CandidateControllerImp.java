@@ -5,6 +5,7 @@ import ma.ensi.myJob.controller.ICandidatePageController;
 import ma.ensi.myJob.entity.Candidat;
 import ma.ensi.myJob.entity.Reclamation;
 import ma.ensi.myJob.entity.Recruteur;
+import ma.ensi.myJob.mapper.CandidatMapper;
 import ma.ensi.myJob.serviceImpl.CandidatService;
 import ma.ensi.myJob.serviceImpl.ReclamationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,4 +97,17 @@ public class CandidateControllerImp implements ICandidatePageController {
         }
         return "redirect:/candidate/Reclamation";
     }
+    @GetMapping("/mon-compte")
+    public String monCompte(Model model, Principal principal) {
+
+        String userName = principal.getName();
+        Candidat candidate = candidatService.findByUsername(userName);
+        model.addAttribute("candidate", CandidatMapper.toDto(candidate));
+
+        String logoPath = candidatService.getLogoOrDefault(candidate);
+        model.addAttribute("logoPath", logoPath);
+
+        return "can-moncompte";
+    }
+
 }

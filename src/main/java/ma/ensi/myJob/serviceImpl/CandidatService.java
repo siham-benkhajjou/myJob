@@ -2,11 +2,17 @@ package ma.ensi.myJob.serviceImpl;
 
 import ma.ensi.myJob.DTO.CandidatDto;
 import ma.ensi.myJob.entity.Candidat;
+import ma.ensi.myJob.entity.Recruteur;
 import ma.ensi.myJob.mapper.CandidatMapper;
 import ma.ensi.myJob.repository.CandidatRepository;
 import ma.ensi.myJob.service.ICandidatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +23,9 @@ public class CandidatService implements ICandidatService {
 
     @Autowired
     CandidatRepository repository;
+
+    @Value("${app.upload-dir}")
+    private String uploadDir;
 
     @Override
     public List<CandidatDto> getAllCandidats() {
@@ -65,5 +74,17 @@ public class CandidatService implements ICandidatService {
     @Override
     public boolean emailExists(String email) {
         return repository.findByEmail(email) != null;
+    }
+
+    public String getLogoOrDefault(Candidat candidat) {
+        String logoPath = candidat.getImage();
+        if (logoPath != null && !logoPath.isEmpty()) {
+            Path imagePath = Paths.get(uploadDir + "/src/main/resources/static" + logoPath);
+            System.out.println(imagePath);
+            if (Files.exists(imagePath)) {
+                return logoPath;
+            }
+        }
+        return "/assets/img/profile-img.jpg";
     }
 }
