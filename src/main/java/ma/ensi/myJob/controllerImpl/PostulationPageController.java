@@ -1,6 +1,5 @@
 package ma.ensi.myJob.controllerImpl;
 
-import ma.ensi.myJob.Service.IOffreService;
 import ma.ensi.myJob.entity.Candidat;
 import ma.ensi.myJob.serviceImpl.CandidatService;
 import ma.ensi.myJob.serviceImpl.OffreServiceImpl;

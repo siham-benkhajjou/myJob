@@ -7,7 +7,7 @@ import ma.ensi.myJob.entity.Recruteur;
 import ma.ensi.myJob.mapper.OffreMapper;
 import ma.ensi.myJob.repository.OffreRepository;
 import ma.ensi.myJob.repository.RecruteurRepository;
-import ma.ensi.myJob.Service.IOffreService;
+import ma.ensi.myJob.service.IOffreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
