@@ -4,12 +4,8 @@ import ma.ensi.myJob.DTO.*;
 import ma.ensi.myJob.entity.*;
 import ma.ensi.myJob.mapper.*;
 import ma.ensi.myJob.repository.RecruteurRepository;
-import ma.ensi.myJob.service.IOffreService;
 import ma.ensi.myJob.serviceImpl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -252,6 +248,10 @@ public class RecruteurPageController {
     public String consulterOffre(@PathVariable Long id, Model model) {
         OffreDto offre = offreServiceImpl.consulterOffre(id);
         model.addAttribute("offre", offre);
+
+        recruteurService.getRecruteurById(offre.getRecruteurId())
+                .ifPresent(recruteur -> model.addAttribute("recruteur", recruteur));
+
         return "consulter-offre";
     }
 

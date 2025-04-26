@@ -21,7 +21,7 @@ public class OffreDto {
 
     private String nomEntreprise;
 
-    public void setDatePublication(Date datePublication) {
+    public void setDate_Publication(Date datePublication) {
 
     }
 

@@ -16,7 +16,7 @@ public class OffreMapper {
         dto.setIntitule(offre.getIntitule());
         dto.setType(offre.getType());
         dto.setDescription(offre.getDescription());
-        dto.setDatePublication(offre.getDatePublication());
+        dto.setDate_Publication(offre.getDatePublication());
         dto.setDateExpiration(offre.getDateExpiration());
         dto.setStatut(offre.getStatut());
         dto.setLieu(offre.getLieu());

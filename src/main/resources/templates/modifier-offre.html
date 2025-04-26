@@ -1,39 +1,90 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modifier Offre</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="/assets/css/main.css" rel="stylesheet" />
 </head>
 <body>
-<h2>Modifier une Offre</h2>
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <a href="/recruteur/home" class="logo d-flex align-items-center me-auto me-xl-0">
+      <h1 class="sitename">MyJob</h1>
+    </a>
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="/recruteur/home">Home</a></li>
+        <li><a href="/recruteur/offres" class="active">Offres</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+    <div class="header-social-links">
+      <a href="/logout" class="logout-link"><i class="bi bi-box-arrow-right"></i> Se déconnecter</a>
+    </div>
+  </div>
+</header>
 
-<form th:action="@{/recruteur/updateOffre}" method="post" th:object="${offre}">
-  <input type="hidden" th:field="*{id}" />
+<main class="main mt-5">
+  <div class="container py-5">
+    <div class="section-title text-center mb-5">
+      <h2>Modifier Offre</h2>
+    </div>
 
-  <label>Intitulé:</label>
-  <input type="text" th:field="*{intitule}" required /><br/>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <form th:action="@{/recruteur/updateOffre}" th:object="${offre}" method="post">
+              <input type="hidden" th:field="*{id}" />
 
-  <label>Type:</label>
-  <select th:field="*{type}">
-    <option value="Stage">Stage</option>
-    <option value="Travail">Travail</option>
-  </select><br/>
+              <div class="mb-4">
+                <label class="form-label">Intitulé</label>
+                <input type="text" class="form-control" th:field="*{intitule}" required>
+              </div>
 
-  <label>Description:</label>
-  <textarea th:field="*{description}" required></textarea><br/>
+              <div class="mb-4">
+                <label class="form-label">Type</label>
+                <select class="form-select" th:field="*{type}">
+                  <option value="Stage">Stage</option>
+                  <option value="Travail">Travail</option>
+                </select>
+              </div>
 
-  <label>Lieu:</label>
-  <input type="text" th:field="*{lieu}" /><br/>
+              <div class="mb-4">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" th:field="*{description}" rows="5" required></textarea>
+              </div>
 
-  <label>Date d’expiration:</label>
-  <input type="date" th:field="*{dateExpiration}" /><br/>
+              <div class="mb-4">
+                <label class="form-label">Lieu</label>
+                <input type="text" class="form-control" th:field="*{lieu}" required>
+              </div>
 
-  <label>Statut:</label>
-  <input type="text" th:field="*{statut}" /><br/>
+              <div class="mb-4">
+                <label class="form-label">Date d'expiration</label>
+                <input type="date" class="form-control" th:field="*{dateExpiration}" required>
+              </div>
 
-  <button type="submit">Enregistrer les modifications</button>
-</form>
+              <div class="mb-4">
+                <label class="form-label">Statut</label>
+                <input type="text" class="form-control" th:field="*{statut}" required>
+              </div>
 
-<a th:href="@{/recruteur/offres}">Annuler</a>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="/recruteur/offres" class="btn btn-outline-secondary me-md-2">Annuler</a>
+                <button type="submit" class="btn btn-accent">Modifier</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

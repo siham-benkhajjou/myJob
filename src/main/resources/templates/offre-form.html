@@ -1,51 +1,110 @@
-<!-- templates/offre-form.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Créer une Offre</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Créer Offre</title>
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
+    <style>
+        .line-mf {
+            width: 40px;
+            height: 3px;
+            background-color: #149ddd;
+            margin: 0 auto 20px auto;
+        }
+    </style>
 </head>
+
 <body>
-<div class="container">
-    <h1 th:text="${offre.id != null} ? 'Modifier Offre' : 'Créer une Nouvelle Offre'">Créer une Offre</h1>
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <a href="/recruteur/home" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
 
-    <form th:action="@{/recruteur/addOffre}" method="post" th:object="${offre}">
-        <div class="form-group">
-            <label for="intitule">Intitulé</label>
-            <input type="text" id="intitule" th:field="*{intitule}" class="form-control" required />
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/recruteur/home">Home</a></li>
+                <li><a href="/recruteur/mon-compte">Mon Compte</a></li>
+                <li><a href="/recruteur/offres" class="active">Offres</a></li>
+                <li><a href="/recruteur/annonces">Annonces</a></li>
+                <li><a href="/recruteur/applications">App Reçus</a></li>
+                <li><a href="/recruteur/Reclamation">Soumettre une Réclamation</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link"><i class="bi bi-box-arrow-right"></i> Se déconnecter</a>
+        </div>
+    </div>
+</header>
+
+<main class="main mt-5">
+    <div class="container py-5">
+        <div class="section-title text-center mb-5">
+            <h2>Nouvelle Offre</h2>
+            <div class="line-mf mb-4"></div>
+            <p>Remplissez ce formulaire pour créer une nouvelle offre d'emploi</p>
         </div>
 
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" th:field="*{description}" class="form-control" rows="4" required></textarea>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <form th:action="@{/recruteur/addOffre}" th:object="${offre}" method="post">
+                            <div class="mb-4">
+                                <label class="form-label">Intitulé</label>
+                                <input type="text" class="form-control" th:field="*{intitule}" required>
+                            </div>
 
-        <div class="form-group">
-            <label for="lieu">Lieu</label>
-            <input type="text" id="lieu" th:field="*{lieu}" class="form-control" required />
-        </div>
+                            <div class="mb-4">
+                                <label class="form-label">Type</label>
+                                <select class="form-select" th:field="*{type}">
+                                    <option value="Stage">Stage</option>
+                                    <option value="Travail">Travail</option>
+                                </select>
+                            </div>
 
-        <div class="form-group">
-            <label for="type">Type de Contrat</label>
-            <input type="text" id="type" th:field="*{type}" class="form-control" required />
-        </div>
+                            <div class="mb-4">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" th:field="*{description}" rows="5" required></textarea>
+                            </div>
 
-        <div class="form-group">
-            <label for="dateExpiration">Date d'expiration</label>
-            <input type="date" id="dateExpiration" th:field="*{dateExpiration}" class="form-control" />
-        </div>
+                            <div class="mb-4">
+                                <label class="form-label">Lieu</label>
+                                <input type="text" class="form-control" th:field="*{lieu}" required>
+                            </div>
 
-        <div class="form-group">
-            <label for="statut">Statut</label>
-            <input type="text" id="statut" th:field="*{statut}" class="form-control" />
-        </div>
+                            <div class="mb-4">
+                                <label class="form-label">Date d'expiration</label>
+                                <input type="date" class="form-control" th:field="*{dateExpiration}" required>
+                            </div>
 
-        <div class="form-group mt-3">
-            <button type="submit" class="btn btn-success">Enregistrer</button>
-            <a th:href="@{/recruteur/offres}" class="btn btn-secondary">Annuler</a>
+                            <div class="mb-4">
+                                <label class="form-label">Statut</label>
+                                <input type="text" class="form-control" th:field="*{statut}" required>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="/recruteur/offres" class="btn btn-outline-secondary me-md-2">
+                                    <i class="bi bi-arrow-left"></i> Annuler
+                                </a>
+                                <button type="submit" class="btn btn-accent">
+                                    <i class="bi bi-send"></i> Créer
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+</main>
+
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

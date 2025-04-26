@@ -1,22 +1,241 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Consulter Offre</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
-<body>
-<h2>Détails de l'Offre</h2>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div>
-    <p><strong>Intitulé:</strong> <span th:text="${offre.intitule}"></span></p>
-    <p><strong>Type:</strong> <span th:text="${offre.type}"></span></p>
-    <p><strong>Description:</strong> <span th:text="${offre.description}"></span></p>
-    <p><strong>Lieu:</strong> <span th:text="${offre.lieu}"></span></p>
-    <p><strong>Date d’expiration:</strong> <span th:text="${offre.dateExpiration}"></span></p>
-    <p><strong>Statut:</strong> <span th:text="${offre.statut}"></span></p>
-    <p><strong>Date de publication:</strong> <span th:text="${offre.datePublication}"></span></p>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Consulter Offre</title>
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Poppins&family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background: white;
+        }
+
+        .split-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .top-part {
+            flex: 1;
+            background: url('/assets/img/backround-offre.png') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            padding: 20px;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            background: #7bb28a;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            width: fit-content;
+        }
+
+        .btn-back i {
+            margin-right: 8px;
+        }
+
+        .btn-back:hover {
+            background: #66a177;
+        }
+
+        .top-center {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-part img.profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid #ffffff;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        .bottom-part {
+            flex: 1;
+            background: white;
+            padding: 50px 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .offre-info {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .offre-info h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .offre-info p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .info-tags {
+            margin: 20px 0;
+        }
+
+        .info-tags span {
+            background: #7bb28a;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .info-tags i {
+            margin-right: 5px;
+        }
+
+        .description h5 {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .description p {
+            margin-top: 10px;
+        }
+
+        .dates p {
+            margin-top: 10px;
+        }
+
+        /* Optional: Make it nice on mobile */
+        @media (max-width: 768px) {
+            .top-part {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body class="index-page">
+
+<!-- Header Section -->
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+        <a href="recruteur-home.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">MyJob</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/recruteur/home" >Home</a></li>
+                <li><a href="/recruteur/mon-compte">Mon Compte</a></li>
+                <li><a href="/recruteur/offres" class="active">Offre</a></li>
+                <li><a href="/recruteur/annonces">Annonce</a></li>
+                <li><a href="/recruteur/applications">App Reçus</a></li>
+                <li><a href="/recruteur/Reclamation">Réclamation</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link">
+                <i class="bi bi-box-arrow-right"></i> Se déconnecter
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Split Container -->
+<div class="split-container">
+
+    <!-- Top Part with Background and Profile Image and Retour Button -->
+    <div class="top-part">
+
+        <a th:href="@{/recruteur/offres}" class="btn-back">
+            <i class="bi bi-arrow-left"></i> Retour
+        </a>
+
+        <div class="top-center">
+            <img src="/assets/img/profile-img.jpg" alt="Profil" class="profile-img">
+        </div>
+
+    </div>
+
+    <!-- Bottom Part with Offer Info -->
+    <div class="bottom-part">
+        <div class="offre-info">
+            <h2 th:text="${offre.nomEntreprise}">Nom Entreprise</h2>
+            <p th:if="${recruteur != null}" th:text="${recruteur.nom + ' ' + recruteur.prenom}">Nom Recruteur</p>
+            <p th:if="${recruteur == null}">Nom Recruteur indisponible</p>
+
+            <div class="info-tags">
+                <span><i class="bi bi-briefcase"></i> <span th:text="${offre.type}">Type</span></span>
+                <span><i class="bi bi-geo-alt"></i> <span th:text="${offre.lieu}">Lieu</span></span>
+            </div>
+
+            <div class="description">
+                <h5><strong>Intitulé:</strong></h5>
+                <p th:text="${offre.intitule}">Titre de l'offre</p>
+
+                <h5><strong>Description:</strong></h5>
+                <p th:text="${offre.description}">Description détaillée de l'offre.</p>
+            </div>
+
+            <div class="dates">
+                <p th:if="${offre.datePublication != null}">
+                    <strong>Date de publication:</strong> <span th:text="${#temporals.format(offre.datePublication, 'dd/MM/yyyy')}">23/04/2025</span>
+                </p>
+                <p th:unless="${offre.datePublication != null}">
+                    <strong>Date de publication:</strong> Non spécifiée
+                </p>
+
+                <p th:if="${offre.dateExpiration != null}">
+                    <strong>Date d'expiration:</strong> <span th:text="${#temporals.format(offre.dateExpiration, 'dd/MM/yyyy')}">30/06/2025</span>
+                </p>
+                <p th:unless="${offre.dateExpiration != null}">
+                    <strong>Date d'expiration:</strong> Non spécifiée
+                </p>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<a th:href="@{/recruteur/offres}">Retour à la liste des offres</a>
 </body>
 </html>
