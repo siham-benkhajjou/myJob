@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Postuler à une offre</title>
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Poppins&family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+        <a href="candidate-home.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1 class="sitename">MyJob</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/candidate/home">home</a></li>
+                <li><a href="/candidate/mon-compte">Mon Compte</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false" >Offres</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/candidate/stage">Stage</a></li>
+                        <li><a href="/candidate/travaille">Travaille</a></li>
+                    </ul>
+                </li>
+                <li><a href="/candidate/annonces">annance</a></li>
+                <li><a href="/candidate/applications">Mes Applications</a></li>
+                <li><a href="/candidate/universite">Université</a></li>
+                <li><a href="/candidate/Reclamation">Réclamation</a></li>
+
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="/logout" class="logout-link">
+                <i class="bi bi-box-arrow-right"></i> Se déconnecter
+            </a>
+        </div>
+
+    </div>
+</header>
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+        <h3>Postuler à l’offre :</h3>
+        <h4 th:text="${offre.intitule}">Titre offre</h4>
+
+        <form id="postulationForm">
+            <input type="hidden" id="offreId" th:value="${offre.id}" />
+            <input type="hidden" id="candidatId" th:value="${candidat.id}" />
+
+            <div class="mb-3">
+                <label for="message" class="form-label">Lettre de Motivation</label>
+                <textarea class="form-control" id="message" rows="4" required></textarea>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Annuler</button>
+                <button type="submit" class="btn custom-btn">Postuler</button>
+            </div>
+        </form>
+
+        <div id="resultat" class="mt-3"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('postulationForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const data = {
+            offreId: +document.getElementById('offreId').value,
+            candidatId: +document.getElementById('candidatId').value,
+            lettreMotivation: document.getElementById('message').value
+        };
+        fetch('/api/postulations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(r => {
+                if (r.ok) {
+                    return r.text();
+                } else {
+                    throw new Error('Erreur lors de la postulation');
+                }
+            })
+            .then(msg => {
+                document.getElementById('resultat').innerHTML =
+                    `<div class="alert alert-success">${msg}</div>`;
+                document.getElementById('postulationForm').reset();
+            })
+            .catch(err => {
+                document.getElementById('resultat').innerHTML =
+                    `<div class="alert alert-danger">Erreur : ${err.message}</div>`;
+            });
+    });
+</script>
+</body>
+</html>

@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     //    private AdminRepository adminRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // Check in Recruteur
         Recruteur recruteur = recruteurService.findByEmail(email);
 

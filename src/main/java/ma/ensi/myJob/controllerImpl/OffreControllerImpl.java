@@ -1,7 +1,7 @@
 package ma.ensi.myJob.controllerImpl;
 
 import ma.ensi.myJob.DTO.OffreDto;
-import ma.ensi.myJob.service.IOffreService;
+import ma.ensi.myJob.Service.IOffreService;
 import ma.ensi.myJob.serviceImpl.OffreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -13,8 +13,6 @@ import java.util.List;
 @RequestMapping("/api/offres")
 public class OffreControllerImpl {
 
-    @Autowired
-    private IOffreService IOffreService;
     @Autowired
     private OffreServiceImpl offreServiceImpl;
 
