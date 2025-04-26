@@ -1,112 +1,187 @@
+<!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mes Réclamations</title>
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-    <link href="/assets/css/main.css" rel="stylesheet" />
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Poppins&family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <style>
+        .create-button {
+            background-color: #7bb28a;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 50px;
+            border: none;
+        }
+
+        .card-reclamation {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .card-reclamation img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 25px;
+        }
+
+        .card-buttons {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .round-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .btn-consult {
+            background-color: #d6dac8;
+            color: black;
+        }
+
+        .btn-delete {
+            background-color: #efbc9b;
+        }
+
+        h2 {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #7bb28a;
+            left: 0;
+            bottom: 0;
+        }
+    </style>
 </head>
 
-<body>
+<body class="index-page">
+
 <header id="header" class="header d-flex align-items-center light-background sticky-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-        <a href="recruteur-home.html" class="logo d-flex align-items-center me-auto me-xl-0">
-            <h1 class="sitename">MyJob</h1>
+        <a href="/recruteur/home" class="logo d-flex align-items-center me-auto me-xl-0 text-decoration-none">
+            <h1 class="sitename text-dark">MyJob</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
-            <ul>
-                <li><a href="/recruteur/home">home</a></li>
-                <li><a href="/recruteur/mon-compte">Mon Compte</a></li>
-                <li><a href="/recruteur/offres">offre</a></li>
-                <li><a href="/recruteur/annonces">annance</a></li>
-                <li><a href="/recruteur/applications">App Reçus</a></li>
-                <li><a href="/recruteur/Reclamation" class="active">Soumettre une Réclamation</a></li>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="/recruteur/home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/recruteur/mon-compte">Mon Compte</a></li>
+                <li class="nav-item"><a class="nav-link" href="/recruteur/offres">Offre</a></li>
+                <li class="nav-item"><a class="nav-link" href="/recruteur/annonces">Annonce</a></li>
+                <li class="nav-item"><a class="nav-link" href="/recruteur/applications">App Reçus</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/recruteur/Reclamation">Soumettre une Réclamation</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
         <div class="header-social-links">
-            <a href="/logout" class="logout-link">
+            <a href="/logout" class="logout-link text-dark text-decoration-none">
                 <i class="bi bi-box-arrow-right"></i> Se déconnecter
             </a>
         </div>
     </div>
 </header>
 
-<main class="main mt-5">
-    <div class="container py-5">
-        <div class="section-title text-center mb-5">
+<main class="main">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Mes Réclamations</h2>
+            <a href="/recruteur/Reclamation/new" class="text-decoration-none">
+                <button class="create-button">+</button>
+            </a>
         </div>
 
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 text-center d-flex flex-column justify-content-between p-3 custom-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <h5 class="card-title">Nouvelle Réclamation</h5>
-                        <p class="card-text">Soumettre une nouvelle réclamation</p>
-                        <a href="/recruteur/Reclamation/new" class="btn btn-accent mt-2">
-                            <i class="bi bi-plus-circle me-2"></i> Créer
-                        </a>
-                    </div>
+        <div th:if="${reclamations != null and !reclamations.isEmpty()}" class="reclamations-list">
+            <div th:each="rec : ${reclamations}" class="card-reclamation">
+                <img src="/assets/img/profile-img.jpg" alt="Profile Image">
+
+                <div class="flex-grow-1">
+                    <h5 th:text="${rec.title}">Titre de la Réclamation</h5>
+                    <p class="mb-1">
+                        <strong>Type :</strong> <span th:text="${rec.type?.displayName}">Type</span> |
+                        <strong>Statut :</strong>
+                        <th:block th:switch="${rec.status?.name()}">
+                            <span th:case="'NOUVELLE'" class="badge bg-primary" th:text="${rec.status?.displayName}">Statut</span>
+                            <span th:case="'EN_COURS'" class="badge bg-warning" th:text="${rec.status?.displayName}">Statut</span>
+                            <span th:case="*" class="badge bg-success" th:text="${rec.status?.displayName}">Statut</span>
+                        </th:block>
+                    </p>
+                    <p class="mb-0 text-muted" th:text="${#dates.format(rec.dateReclamation, 'dd/MM/yyyy')}">Date de réclamation</p>
+                </div>
+
+                <div class="card-buttons">
+                    <a th:href="@{/recruteur/Reclamation/{id}(id=${rec.idReclamation})}">
+                        <button class="round-btn btn-consult" title="Voir Détails"><i class="bi bi-arrow-right"></i></button>
+                    </a>
+                    <form th:action="@{/recruteur/deleteReclamation/{id}(id=${rec.idReclamation})}" method="post" style="display:inline;">
+                        <button type="submit" class="round-btn btn-delete" title="Supprimer"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réclamation ?');">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-
-            <th:block th:if="${not #lists.isEmpty(reclamations)}">
-                <div th:each="rec : ${reclamations}" class="col-md-4 mb-4">
-                    <div class="card h-100 text-center d-flex flex-column justify-content-between p-3 custom-card">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <th:block th:switch="${rec.status?.name()}">
-                                        <span th:case="'NOUVELLE'" class="badge bg-primary" th:text="${rec.status?.displayName}">Statut</span>
-                                        <span th:case="'EN_COURS'" class="badge bg-warning" th:text="${rec.status?.displayName}">Statut</span>
-                                        <span th:case="*"
-                                              class="badge bg-success"
-                                              th:text="${rec.status?.displayName}">Statut</span>
-                                    </th:block>
-
-                                    <small class="text-muted" th:text="${#dates.format(rec.dateReclamation, 'dd/MM/yyyy')}">
-                                        Date
-                                    </small>
-                                </div>
-                            </div>
-                            <h5 class="card-title" th:text="${rec.title}">Titre</h5>
-                            <h6 class="card-subtitle mb-2 text-muted" th:text="${rec.type?.displayName}">Type</h6>
-                            <p class="card-text text-truncate" th:text="${rec.description}">Description</p>
-                            <a th:href="@{/recruteur/Reclamation/{id}(id=${rec.idReclamation})}"
-                               class="btn btn-accent btn-sm mt-2">
-                                <i class="bi bi-eye-fill me-1"></i> Voir détails
-                            </a>
-
-                            <form th:action="@{/recruteur/deleteReclamation/{id}(id=${rec.idReclamation})}"
-                                  method="post"
-                                  th:object="${rec}"
-                                  class="mt-2"
-                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réclamation ?');">
-                                <button type="submit" class="btn btn-accent btn-sm">
-                                    <i class="bi bi-trash3-fill me-1"></i> Supprimer
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </th:block>
-
-
         </div>
 
-        <div th:if="${#lists.isEmpty(reclamations)}" class="alert alert-info mt-4 text-center">
+        <div th:if="${reclamations == null or reclamations.isEmpty()}" class="alert alert-info text-center mt-4">
             Vous n'avez pas encore de réclamations.
         </div>
     </div>
 </main>
 
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
 <script src="/assets/js/main.js"></script>
-</body>
 
+</body>
 </html>
