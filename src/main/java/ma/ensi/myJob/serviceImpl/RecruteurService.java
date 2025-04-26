@@ -124,5 +124,8 @@ public class RecruteurService implements IRecruteurService {
         return recruteurRepository.existsById(id);
     }
 
+    public Recruteur findById(Long id) {
+        return recruteurRepository.findById(id).orElse(null);
+    }
 }
 

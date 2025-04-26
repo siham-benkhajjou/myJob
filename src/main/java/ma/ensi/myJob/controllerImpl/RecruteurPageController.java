@@ -195,6 +195,8 @@ public class RecruteurPageController {
         String name = principal.getName();
         Recruteur recruteur = recruteurService.findByUsername(name);
         List<OffreDto> offres = offreServiceImpl.getOffresByRecruteurId(recruteur.getId());
+        String logoPath = recruteurService.getLogoOrDefault(recruteur);
+        model.addAttribute("logoPath", logoPath);
         model.addAttribute("offres", offres);
         return "offre-list";
     }

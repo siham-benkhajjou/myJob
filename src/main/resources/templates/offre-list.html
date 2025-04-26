@@ -145,7 +145,7 @@
 
         <div th:if="${offres != null}" class="offres-list">
             <div th:each="offre : ${offres}" class="card-offre">
-                <img src="/assets/img/profile-img.jpg" alt="Logo Entreprise">
+                <img th:src="@{${logoPath}}" alt="Logo Entreprise">
 
                 <div class="flex-grow-1">
                     <h5 th:text="${offre.intitule}">Intitulé de l'offre</h5>
